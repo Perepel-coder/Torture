@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfAnyType>
+    <anyType xsi:type="ArrayOfAnyType">
+      <anyType xmlns:q1="http://microsoft.com/wsdl/types/" xsi:type="q1:char">49</anyType>
+      <anyType xmlns:q2="http://microsoft.com/wsdl/types/" xsi:type="q2:char">48</anyType>
+    </anyType>
+  </ArrayOfAnyType>
+</ArrayOfArrayOfAnyType>

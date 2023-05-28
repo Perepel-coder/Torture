@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="View.Researcher.Tasks.Controls.Rocket_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:src="clr-namespace:View.Tools" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d" Width="900" Height="550">
+    <Grid Background="#80808080">
+        <DockPanel Grid.Row="1" Grid.ColumnSpan="2">
+
+            <Grid DockPanel.Dock="Left" Width="500">
+                <GroupBox Header="Компилятор C#">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" 
+                                 Text="{Binding Controls.Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"/>
+                        <Button Grid.Row="1" Content="Компилировать"
+                                Command="{Binding Compiler}"
+                                CommandParameter="{Binding ElementName=GIF}"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+            <Grid DockPanel.Dock="Top" Height="150">
+                <Image x:Name="GIF"
+                           gif:ImageBehavior.AnimatedSource="/Researcher/Tasks/Resourses/Rocket.gif" 
+                           gif:ImageBehavior.AutoStart="False"/>
+            </Grid>
+            <Grid  DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="Условие задачи" Grid.Row="0">
+                    <TextBlock Background="White" 
+                               Text="{Binding Controls.TextTask}" 
+                               TextWrapping="Wrap"/>
+                </GroupBox>
+                <GroupBox Header="Пример" Grid.Row="1">
+                    <WebBrowser src:WebBrowserHelper.Body="{Binding Controls.HtmlCode}"/>
+                </GroupBox>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

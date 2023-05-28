@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="View.Researcher.Scripts.Controls.TrainInform_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:View.Researcher.Scripts.Controls"
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+             xmlns:src="clr-namespace:View.Tools"
+             mc:Ignorable="d" Width="900" Height="550">
+    <Grid>
+        <Grid Margin="5" x:Name="Inform">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <wv2:WebView2 src:WebView2Helper.Body="{Binding Controls.Info}"/>
+            <Button 
+            x:Name="ForthBTN"
+            Content="Продолжить" 
+            Grid.Row="1" 
+            Margin="5" 
+            Click="ForthBTN_Click"
+            Command="{Binding Forth}"/>
+        </Grid>
+
+        <controls:Test_Control x:Name="Test_Control" 
+                               DataContext="{Binding Controls.CurrentVM_TrainInform}"
+                               Visibility="Collapsed"/>
+
+    </Grid>
+</UserControl>

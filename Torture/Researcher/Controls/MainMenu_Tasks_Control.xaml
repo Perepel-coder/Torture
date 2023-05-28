@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="View.Researcher.Controls.MainMenu_Tasks_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:View.Researcher.Tasks.Controls" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" Width="900" Height="600" Name="MainMenu_Tasks">
+    <Grid Background="#80808080">
+        
+        <!--#region Task Menu-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button x:Name="CloseBTN" 
+                    Grid.Column="2" 
+                    Visibility="Collapsed"
+                    Click="CloseBTN_Click"
+                    Style="{StaticResource Close_btn}">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Researcher/Resourses/Close.png"/>
+                </Button.Background>
+            </Button>
+
+            <!--#region Grid -->
+            <Grid Grid.Row="1" Grid.ColumnSpan="3" x:Name="TaskMenu">
+
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" 
+                       Text="Задачник" 
+                       HorizontalAlignment="Center"  
+                       Style="{StaticResource font_style}"/>
+                    <ListView x:Name="ListView_TaskMult" 
+                                      Background="Transparent"
+                                      BorderBrush="Transparent"
+                                      ItemContainerStyle="{StaticResource ListView_NV_Style}"
+                                      ItemsSource="{Binding Controls.Tasks}"
+                                      SelectedItem="{Binding Controls.SelectTask}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding Name}"
+                                                   PreviewMouseLeftButtonUp="TextBlock_PreviewMouseLeftButtonUp"
+                                                   Style="{StaticResource font_style}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                        <i:InvokeCommandAction 
+                                                            Command="{Binding DataContext.GetTask, 
+                                                            RelativeSource={RelativeSource FindAncestor, 
+                                                            AncestorType={x:Type ItemsControl}}}">                                
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                    </TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DockPanel>
+
+            </Grid>
+            <!--#endregion-->
+            
+        </Grid>
+        <!--#endregion-->
+
+        <Grid>
+            <controls:CombinationLock_Control x:Name="CombinationLock_Control" 
+                                              Visibility="{Binding 
+                ElementName=MainMenu_Tasks, 
+                Path=DataContext.Controls.CombLock_V,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"
+                                              DataContext="{Binding Controls.CurrentVM_MenuTasks}"/>
+            
+            <controls:Rocket_Control x:Name="Rocket_Control" 
+                                     Visibility="{Binding 
+                ElementName=MainMenu_Tasks, 
+                Path=DataContext.Controls.Rocket_V,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"
+                                     DataContext="{Binding Controls.CurrentVM_MenuTasks}"/>
+            
+            <controls:KeySelection_Control x:Name="KeySelection_Control"
+                                           Visibility="{Binding 
+                ElementName=MainMenu_Tasks, 
+                Path=DataContext.Controls.KeySelection_V,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"
+                                           DataContext="{Binding Controls.CurrentVM_MenuTasks}"/>
+        </Grid>
+    </Grid>
+    
+</UserControl>

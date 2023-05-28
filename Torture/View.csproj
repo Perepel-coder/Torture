@@ -1,0 +1,157 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Researcher\Resourses\Close.png" />
+    <None Remove="Researcher\Resourses\Coin.jpg" />
+    <None Remove="Researcher\Resourses\Crypto.png" />
+    <None Remove="Researcher\Resourses\Home.png" />
+    <None Remove="Researcher\Resourses\Run.png" />
+    <None Remove="Researcher\Resourses\Task.png" />
+    <None Remove="Researcher\Resourses\tgBtn_default.png" />
+    <None Remove="Researcher\Scripts\Resourses\AESScript_Part1.pdf" />
+    <None Remove="Researcher\Scripts\Resourses\Sum&amp;MultGF%282n%29.pdf" />
+    <None Remove="Researcher\Scripts\Resourses\TrainInfo.html" />
+    <None Remove="Researcher\Tasks\Resourses\CompilerDivPoly.html" />
+    <None Remove="Researcher\Tasks\Resourses\CompilerMultPoly.html" />
+    <None Remove="Researcher\Tasks\Resourses\css\mystyle.css" />
+    <None Remove="Researcher\Tasks\Resourses\DivOfPolyGF.html" />
+    <None Remove="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_A.xml" />
+    <None Remove="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_TC.xml" />
+    <None Remove="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_A.xml" />
+    <None Remove="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_TC.xml" />
+    <None Remove="Researcher\Tasks\Resourses\Files\SelectKey_Task1.txt" />
+    <None Remove="Researcher\Tasks\Resourses\Files\SelectKey_Task1.xml" />
+    <None Remove="Researcher\Tasks\Resourses\MultOfPolyGF.html" />
+    <None Remove="Researcher\Tasks\Resourses\Rocket.gif" />
+    <None Remove="Researcher\Tasks\Resourses\SelectKey.html" />
+    <None Remove="Researcher\Tasks\Resourses\SumOfPolyGF.html" />
+    <None Remove="Researcher\Tasks\Resourses\Treasure.gif" />
+    <None Remove="Tutor\Resourses\Alg.png" />
+    <None Remove="Tutor\Resourses\setting.png" />
+    <None Remove="Tutor\Resourses\Train.png" />
+    <None Remove="Tutor\Resourses\User.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Researcher\Scripts\Resourses\AESScript_Part1.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\CompilerDivPoly.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Researcher\Tasks\Resourses\css\mystyle.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_A.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_TC.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_A.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_TC.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Tasks\Resourses\Files\SelectKey_Task1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Tasks\Resourses\Rocket.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.0.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1722.45" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit">
+      <HintPath>..\..\..\libraries\system.windows.controls.datavisualization.toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Researcher\Scripts\Resourses\Sum&amp;MultGF(2n).pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Scripts\Resourses\TrainInfo.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\CompilerMultPoly.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\DivOfPolyGF.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\MultOfPolyGF.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\SelectKey.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\SumOfPolyGF.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Resource Include="Researcher\Resourses\Close.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Resourses\Coin.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Resourses\Crypto.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Resourses\Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Resourses\Run.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Resourses\Task.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Resourses\tgBtn_default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Researcher\Tasks\Resourses\Treasure.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Tutor\Resourses\Alg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Tutor\Resourses\setting.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Tutor\Resourses\Train.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Tutor\Resourses\User.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

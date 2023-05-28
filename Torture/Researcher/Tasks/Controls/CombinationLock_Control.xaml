@@ -1,0 +1,170 @@
+﻿<UserControl x:Class="View.Researcher.Tasks.Controls.CombinationLock_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:src="clr-namespace:View.Tools" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             mc:Ignorable="d" Width="900" Height="560">
+    <Grid Background="#80808080">
+        <DockPanel Grid.ColumnSpan="2">
+
+            <Grid DockPanel.Dock="Left" Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="Условие задачи" Grid.Row="0">
+                    <TextBlock Background="White" 
+                               Text="{Binding Controls.TextTask}" 
+                               TextWrapping="Wrap"/>
+                </GroupBox>
+                <GroupBox Header="Начальные данные"  Grid.Row="1">
+                    <TextBlock Background="White" Text="{Binding Controls.StartData}" TextWrapping="Wrap"/>
+                </GroupBox>
+            </Grid>
+
+            <!--#region Кодовый замок-->
+            <GroupBox Header="Кодовый замок" DockPanel.Dock="Top" Height="200">
+                <Grid MaxWidth="700">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition MinWidth="300" Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1" Grid.ColumnSpan="3" Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0">
+                            <TextBlock Text="{Binding Controls.GetLock.Field_1}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Black" Grid.Column="1">
+                            <TextBlock Text="{Binding Controls.GetLock.Field_2}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Black" Grid.Column="2">
+                            <TextBlock Text="{Binding Controls.GetLock.Field_3}"/>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="Black" Grid.Column="3">
+                            <TextBlock Text="{Binding Controls.GetLock.Field_4}"/>
+                        </Border>
+                    </Grid>
+                    <!--#region Buttons -->
+                    <Button x:Name="Button_1" Grid.Row="1" Grid.Column="1" Content="1" 
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_1, Path=Content}"/>
+                    <Button x:Name="Button_2" Grid.Row="1" Grid.Column="2" Content="2"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_2, Path=Content}"/>
+                    <Button x:Name="Button_3" Grid.Row="1" Grid.Column="3" Content="3"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_3, Path=Content}"/>
+                    <Button x:Name="Button_4" Grid.Row="2" Grid.Column="1" Content="4"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_4, Path=Content}"/>
+                    <Button x:Name="Button_5" Grid.Row="2" Grid.Column="2" Content="5"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_5, Path=Content}"/>
+                    <Button x:Name="Button_6" Grid.Row="2" Grid.Column="3" Content="6"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_6, Path=Content}"/>
+                    <Button x:Name="Button_7" Grid.Row="3" Grid.Column="1" Content="7"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_7, Path=Content}"/>
+                    <Button x:Name="Button_8" Grid.Row="3" Grid.Column="2" Content="8"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_8, Path=Content}"/>
+                    <Button x:Name="Button_9" Grid.Row="3" Grid.Column="3" Content="9"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_9, Path=Content}"/>
+                    <Button Grid.Row="4" Grid.Column="1" Content="R" Command="{Binding Reset}" />
+                    <Button x:Name="Button_0" Grid.Row="4" Grid.Column="2" Content="0"
+                        Command="{Binding SetCode}" 
+                        CommandParameter="{Binding ElementName=Button_0, Path=Content}"/>
+                    <Button Grid.Row="4" Grid.Column="3" Content="E" 
+                        Command="{Binding Enter}"
+                        CommandParameter="{Binding ElementName=GIF}"/>
+                    <!--#endregion-->
+                    <Image x:Name="GIF"
+                           gif:ImageBehavior.AnimatedSource="/Researcher/Tasks/Resourses/Treasure.gif" 
+                           gif:ImageBehavior.AutoStart="False"
+                           Grid.Column="5" Grid.RowSpan="5"/>
+                </Grid>
+            </GroupBox>
+            <!--#endregion-->
+
+            <DockPanel DockPanel.Dock="Bottom">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Инструмент - получение плинома" 
+                              Grid.Row="0"
+                              Width="300">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="110" Text="Десятичная форма"/>
+                                <TextBox Width="180" Text="{Binding Controls.DecimalForm}"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,5,0,0">
+                                <Button Content="Рассчитать" Command="{Binding CulcFuncTrans}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <TextBlock Width="110" Text="Полином"/>
+                                    <TextBox Text="{Binding Controls.BinaryForm}" Width="180" IsReadOnly="True"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Инструмент - вычисление" 
+                              Grid.Row="1"
+                              Width="300"
+                              IsEnabled="{Binding Controls.IsEnabledTool}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Width="110">
+                                    <TextBlock Height="22" Text="Первый ключ (|10|)"/>
+                                    <TextBlock Height="22" Text="Второй ключ (|10|)"/>
+                                    <TextBlock Height="22" Text="Модуль (|10|)"/>
+                                </StackPanel>
+                                <StackPanel Width="180">
+                                    <wpfx:IntegerUpDown Maximum="1000" Minimum="0" Height="20"
+                                                        Value="{Binding Path=Controls.Key1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <wpfx:IntegerUpDown Maximum="1000" Minimum="0" Height="20"
+                                                        Value="{Binding Path=Controls.Key2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <wpfx:IntegerUpDown Maximum="1000" Minimum="0" Height="20"
+                                                        Value="{Binding Path=Controls.Mod, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Margin="0,5,0,0">
+                                <Button Content="Рассчитать" Command="{Binding CulcFuncMath}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <TextBlock Width="110" Text="Ответ"/>
+                                    <TextBlock Background="White" Text="{Binding Controls.MyAnswer}" Width="180"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+                <GroupBox Header="Код на C#">
+                    <WebBrowser src:WebBrowserHelper.Body="{Binding Controls.HtmlCode}"/>
+                </GroupBox>
+            </DockPanel>
+
+        </DockPanel>
+    </Grid>
+
+</UserControl>

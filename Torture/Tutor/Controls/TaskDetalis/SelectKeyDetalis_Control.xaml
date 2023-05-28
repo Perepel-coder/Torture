@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="View.Tutor.Controls.SelectKeyDetalis_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="450" Width="300">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,5">
+            <TextBlock Width="190" Text="Название класса:" 
+                                   Style="{StaticResource font_style}"/>
+            <TextBlock Width="110" Style="{StaticResource font_style}"
+                       FontSize="14"
+                       Text="{Binding Controls.SelectKeyTask.ClassName}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,5">
+            <TextBlock Width="190" Text="Название метода:" 
+                                   Style="{StaticResource font_style}"/>
+            <TextBlock Width="110" Style="{StaticResource font_style}"
+                       FontSize="14"
+                       Text="{Binding Controls.SelectKeyTask.MethodName}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,5">
+            <TextBlock Width="100" Text="Алфавит:" 
+                                   Style="{StaticResource font_style}"/>
+            <TextBlock Width="190" Style="{StaticResource font_style}"
+                       FontSize="14"
+                       Text="{Binding Controls.SelectKeyTask.Alphabet}"/>
+        </StackPanel>
+        <StackPanel Margin="0,5">
+            <TextBlock Text="Зашифрованное сообщение:" 
+                       Style="{StaticResource font_style}"/>
+            <Border BorderBrush="White" BorderThickness="1">
+                <ScrollViewer Height="135" Width="300">
+                    <TextBox FontSize="12" IsReadOnly="True"
+                             Text="{Binding Controls.SelectKeyTask.EncryptMSG}"/>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+        <StackPanel Margin="0,5">
+            <TextBlock Text="Расшифрованное сообщение:" 
+                       Style="{StaticResource font_style}"/>
+            <Border BorderBrush="White" BorderThickness="1">
+                <ScrollViewer Height="135" Width="300">
+                    <TextBox FontSize="12" IsReadOnly="True"
+                             Text="{Binding Controls.SelectKeyTask.Answer}"/>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

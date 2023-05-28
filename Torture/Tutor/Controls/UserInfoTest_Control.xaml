@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="View.Tutor.Controls.UserInfoTest_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="570" Width="790">
+    <StackPanel Background="#80808080">
+        <StackPanel Margin="5">
+            <GroupBox Header="Резюме" Height="130">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="300">
+                        <TextBlock Text="Номер теста" Style="{StaticResource font_style}"/>
+                        <TextBlock Text="Название теста" Style="{StaticResource font_style}"/>
+                        <TextBlock Text="Общая оценка (вопросы)" Style="{StaticResource font_style}"/>
+                        <TextBlock Text="Общая оценка (задачи)" Style="{StaticResource font_style}"/>
+                    </StackPanel>
+                    <StackPanel Width="470">
+                        <TextBlock Text="{Binding Controls.Script.Test.TestNum}" Style="{StaticResource font_style}"/>
+                        <TextBlock Text="{Binding Controls.Script.Test.Name}" Style="{StaticResource font_style}"/>
+                        <TextBlock Text="{Binding Controls.Script.Test.QuestionsScore}" Style="{StaticResource font_style}"/>
+                        <TextBlock Text="{Binding Controls.Script.Test.TasksScore}" Style="{StaticResource font_style}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <DockPanel>
+                <TextBlock Text="Статистика по вопросам теста" 
+                       DockPanel.Dock="Top"
+                       Style="{StaticResource font_style}"/>
+                <DataGrid DockPanel.Dock="Top" Height="180"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding Controls.Script.Test.Questions}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="70" Binding="{Binding QuestionNum}"/>
+                        <DataGridTextColumn Header="Текст" Width="610" Binding="{Binding Text}"/>
+                        <DataGridTextColumn Header="Оценка" Width="70" Binding="{Binding Score}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock Text="Статистика по задачам сценария" 
+                           Margin="0,5,0,0"
+                           DockPanel.Dock="Top"
+                           Style="{StaticResource font_style}"/>
+                <DataGrid DockPanel.Dock="Top" Height="150"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding Controls.Script.Test.Tasks}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Номер" Width="70" Binding="{Binding TaskNum}"/>
+                        <DataGridTextColumn Header="Название" Width="610" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Оценка" Width="70" Binding="{Binding Score}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

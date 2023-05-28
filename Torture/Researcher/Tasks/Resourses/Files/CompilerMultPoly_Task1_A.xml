@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">38</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">42</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">28</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">23</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">53</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">82</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">40</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">21</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">12</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">19</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">26</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">10</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">6</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">1</anyType>
+  </ArrayOfAnyType>
+</ArrayOfArrayOfAnyType>

@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="View.Researcher.Tasks.Controls.KeySelection_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:src="clr-namespace:View.Tools" 
+             mc:Ignorable="d" Width="900" Height="550">
+
+    <Grid Background="#80808080">
+        <DockPanel>
+
+            <DockPanel DockPanel.Dock="Left" Width="450" Margin="2, 0">
+                <GroupBox DockPanel.Dock="Top" Header="Основные настройки">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="0,3">
+                                <TextBlock Height="25" Margin="0,2"
+                                           Text="Дополняющий символ"/>
+                                <TextBlock Height="25" Margin="0,4"
+                                           Text="Стартовое значение ключа"/>
+                                <TextBlock Height="25" Margin="0,2"
+                                           Text="Инициализирующий вектор"/>
+                            </StackPanel>
+                            <StackPanel Margin="5,3" Width="260">
+                                <TextBox Margin="0,3" Height="25" MaxLength="1"
+                                         Text="{Binding Controls.Tools.Dchar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Margin="0,3" Height="25"
+                                           Background="White"
+                                           Text="{Binding Controls.Tools.Key,
+                                    Mode=TwoWay, 
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+                                <wpfx:IntegerUpDown Margin="0,3" Height="25" Minimum="1"
+                                                    Value="{Binding Path=Controls.Tools.Vec, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Криптоалгоритм" DockPanel.Dock="Top">
+                    <ComboBox IsReadOnly="True" IsEditable="False"
+                          ItemsSource="{Binding Controls.ListOfAlg}" 
+                          SelectedItem="{Binding Controls.Tools.Alg}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </GroupBox>
+                <GroupBox Header="Режим шифрования" DockPanel.Dock="Top">
+                    <ComboBox IsReadOnly="True" IsEditable="False"
+                          ItemsSource="{Binding Controls.ListOfAlgMode}" 
+                          SelectedItem="{Binding Controls.Tools.Mode}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </GroupBox>
+                
+                <GroupBox Header="Пример" DockPanel.Dock="Top" Height="150">
+                    <Grid>
+                        <WebBrowser src:WebBrowserHelper.Body="{Binding Controls.HtmlCode}"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Header="Компилятор C#" DockPanel.Dock="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" 
+                                 Text="{Binding Controls.Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 TextWrapping="Wrap"
+                                 AcceptsTab="True"
+                                 AcceptsReturn="True"/>
+                        <StackPanel Grid.Row="1"
+                                    Margin="5"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                            <Button Width="150" Content="Компилировать"
+                                Command="{Binding Compiler}"/>
+                            <Button Width="150" Content="Запустить"
+                                Command="{Binding Start}"/>
+                            <Button Width="150" Content="Прервать"
+                                Command="{Binding Stop}"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </DockPanel>
+            
+            <DockPanel DockPanel.Dock="Right" Margin="2, 0">
+                <Grid DockPanel.Dock="Top" Height="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Зашифрованное сообщение" Grid.Row="0">
+                        <ScrollViewer>
+                            <TextBlock Background="White"
+                                   TextWrapping="Wrap"
+                                   Text="{Binding Controls.EncryptMSG}"/>
+                        </ScrollViewer>
+                    </GroupBox>
+                    <GroupBox Header="Расшифрованное сообщение" Grid.Row="1">
+                        <ScrollViewer>
+                            <TextBlock Background="White"
+                                       Text="{Binding Controls.Answer, 
+                                Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"/>
+                        </ScrollViewer>
+                    </GroupBox>
+                </Grid>
+
+                <GroupBox Header="Условие задачи" DockPanel.Dock="Bottom">
+                    <ScrollViewer>
+                        <TextBlock Background="White" 
+                               Text="{Binding Controls.TextTask}" 
+                               TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </GroupBox>
+            </DockPanel>
+            
+        </DockPanel>
+    </Grid>
+</UserControl>

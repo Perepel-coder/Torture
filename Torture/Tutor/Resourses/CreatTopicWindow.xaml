@@ -1,0 +1,29 @@
+﻿<Window x:Class="View.Tutor.Resourses.CreatTopicWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:View.Tutor.Resourses"
+        mc:Ignorable="d"
+        Title="CreatTopicWindow" Height="200" Width="300">
+    <Grid Background="Black">
+        <!--#region  Background image-->
+        <Grid>
+            <Grid.Background>
+                <!--<ImageBrush x:Name="img_bg" ImageSource="./Resourses/Coin.jpg"/>-->
+                <SolidColorBrush x:Name="img_bg" Color="DarkGray"/>
+            </Grid.Background>
+        </Grid>
+        <!--#endregion-->
+        <StackPanel VerticalAlignment="Center">
+            <StackPanel Margin="5">
+                <TextBlock Text="Название темы" Style="{StaticResource font_style}"/>
+                <TextBox Text="{Binding Controls.Topic}"/>
+            </StackPanel>
+            <StackPanel Margin="5,0">
+                <Button Content="Добавить тему"
+                        Command="{Binding Save}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

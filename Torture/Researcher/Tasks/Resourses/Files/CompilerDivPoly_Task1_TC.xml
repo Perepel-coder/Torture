@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfArrayOfAnyType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">127</anyType>
+    <anyType xsi:type="xsd:int">34</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">255</anyType>
+    <anyType xsi:type="xsd:int">138</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">148</anyType>
+    <anyType xsi:type="xsd:int">54</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">18</anyType>
+    <anyType xsi:type="xsd:int">112</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">67</anyType>
+    <anyType xsi:type="xsd:int">81</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">79</anyType>
+    <anyType xsi:type="xsd:int">23</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">6</anyType>
+    <anyType xsi:type="xsd:int">12</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">9</anyType>
+    <anyType xsi:type="xsd:int">32</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">30</anyType>
+    <anyType xsi:type="xsd:int">11</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">17</anyType>
+    <anyType xsi:type="xsd:int">18</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">11</anyType>
+    <anyType xsi:type="xsd:int">12</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">3</anyType>
+    <anyType xsi:type="xsd:int">6</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">5</anyType>
+    <anyType xsi:type="xsd:int">7</anyType>
+  </ArrayOfAnyType>
+  <ArrayOfAnyType>
+    <anyType xsi:type="xsd:int">3</anyType>
+    <anyType xsi:type="xsd:int">2</anyType>
+  </ArrayOfAnyType>
+</ArrayOfArrayOfAnyType>

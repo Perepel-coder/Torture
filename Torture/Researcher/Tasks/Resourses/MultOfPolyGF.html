@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="./css/mystyle.css" />
+</head>
+<body>
+   <div id="hler_71238" class="slgh">
+       <ol class="lines no-wrap"><li class="alt1"><code class="keyword">public</code> <code class="keyword">static</code> <code class="keyword">ulong</code> <code class="plain">MultOfPolyGF(</code><code class="keyword">ulong</code> <code class="plain">poly1, </code><code class="keyword">ulong</code> <code class="plain">poly2, </code><code class="keyword">ulong</code> <code class="plain">modPoly)</code></li><li class="alt2"><code class="plain">{</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">ulong</code> <code class="plain">result = 0;</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">if</code> <code class="plain">(poly1 &lt; poly2)</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">{</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">ulong</code> <code class="plain">item = poly1;</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">poly1 = poly2;</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">poly2 = item;</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">while</code> <code class="plain">(poly2 != 0)</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">{</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">if</code> <code class="plain">((poly2 &amp; 0x01) == 1)</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">{</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">result ^= poly1;</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">poly1 &lt;&lt;= 1;</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">poly2 &gt;&gt;= 1;</code></li><li class="alt2">&nbsp;&nbsp;&nbsp;&nbsp;<code class="plain">}</code></li><li class="alt1">&nbsp;&nbsp;&nbsp;&nbsp;<code class="keyword">return</code> <code class="plain">DivOfPolyGF(result, modPoly)[1];</code></li><li class="alt2"><code class="plain">}</code></li></ol>
+   </div>
+</body>
+</html>

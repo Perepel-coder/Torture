@@ -1,0 +1,138 @@
+﻿.slgh, .slgh code, .slgh ul, .slgh ol {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: none;
+    text-align: left;
+    float: none;
+    vertical-align: baseline;
+    position: static;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    height: auto;
+    width: auto;
+    line-height: 1.1em;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 90%;
+    min-height: inherit;
+    min-height: auto;
+}
+.slghcr a {
+    color: #aaa;
+    background: #fff;
+    text-decoration: none;
+    border-bottom: 1px dotted #aaa;
+    font-size: 90%;
+    font-family: arial
+}
+.slgh {
+    background: #fff;
+    width: 99%;
+    margin: 1em 0;
+    padding: 1px;
+    position: relative;
+    overflow: auto;
+    overflow-y: hidden;
+}
+
+    .slgh ul {
+        list-style: none;
+        margin-left: .5em
+    }
+
+    .slgh ol {
+        margin-left: 3.5em
+    }
+
+    .slgh .bold {
+        font-weight: bold;
+    }
+
+    .slgh .italic {
+        font-style: italic;
+    }
+
+    .slgh .no-wrap li {
+        white-space: pre;
+    }
+
+    .slgh li {
+        padding-left: .5em;
+    }
+
+    .slgh li {
+        border-left: 3px solid #ccc;
+        color: #666;
+    }
+
+        .slgh li.alt1 {
+            background: #fff;
+            padding-left: 1em;
+        }
+
+        .slgh li.alt2 {
+            background: #F8F8F8;
+            padding-left: 1em;
+        }
+
+    .slgh .plain, .slgh .plain a {
+        color: #000;
+    }
+
+    .slgh .comments, .slgh .comments a {
+        color: #008200;
+    }
+
+    .slgh .string, .slgh .string a {
+        color: blue;
+    }
+
+    .slgh .keyword {
+        color: #069;
+        font-weight: bold;
+    }
+
+    .slgh .preprocessor {
+        color: gray;
+    }
+
+    .slgh .variable {
+        color: #a70;
+    }
+
+    .slgh .value {
+        color: #090;
+    }
+
+    .slgh .functions {
+        color: #ff1493;
+    }
+
+    .slgh .constants {
+        color: #0066CC;
+    }
+
+    .slgh .script {
+        background: yellow;
+    }
+
+    .slgh .color1, .slgh .color1 a {
+        color: #808080;
+    }
+
+    .slgh .color2, .slgh .color2 a {
+        color: #ff1493;
+    }
+
+    .slgh .color3, .slgh .color3 a {
+        color: red;
+    }
+
+.slghcr {
+    margin: -.5em 1.2em
+}

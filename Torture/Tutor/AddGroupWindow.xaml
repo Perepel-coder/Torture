@@ -1,0 +1,111 @@
+﻿<Window x:Class="View.Tutor.AddGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        x:Name="AddGroup"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Height="600" Width="800">
+    <Grid Background="Black">
+        <!--#region  Background image-->
+        <Grid>
+            <Grid.Background>
+                <!--<ImageBrush x:Name="img_bg" ImageSource="./Resourses/Coin.jpg"/>-->
+                <SolidColorBrush x:Name="img_bg" Color="DarkGray"/>
+            </Grid.Background>
+        </Grid>
+        <!--#endregion-->
+        <StackPanel Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Width="200">
+                    <TextBlock Text="Название" Style="{StaticResource font_style}"/>
+                    <TextBlock Text="Руководитель" Style="{StaticResource font_style}"/>
+                </StackPanel>
+                <StackPanel Width="580">
+                    <TextBox Text="{Binding 
+                        Path=Controls.GroupName,
+                        Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Controls.Tutor.Login}" 
+                               Style="{StaticResource font_style}"/>
+                </StackPanel>
+            </StackPanel>
+            <Grid Height="450">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Текущие участники группы" Grid.Column="0">
+                    <ListView
+                        Background="Transparent"
+                        BorderBrush="Transparent" 
+                        ScrollViewer.CanContentScroll="False"
+                        ItemContainerStyle="{StaticResource ListView_NV_Style_Transparent}"
+                        ItemsSource="{Binding Controls.CurrentResearchers}"
+                        SelectedItem="{Binding Controls.CurrentRes}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Text="{Binding Login}" 
+                                        TextWrapping="Wrap"
+                                        Width="260"
+                                        Style="{StaticResource font_style}"/>
+                                    <TextBlock Width="100" Text="Удалить">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction 
+                                                Command="{Binding DataContext.Delete, 
+                                                RelativeSource={RelativeSource FindAncestor, 
+                                                AncestorType={x:Type ItemsControl}}}">
+                                                </i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </GroupBox>
+                <GroupBox Header="Добавить нового участника" Grid.Column="1">
+                    <StackPanel>
+                        <TextBlock Text="Выбрать свободного пользователя"
+                                   Style="{StaticResource font_style}"/>
+                        <ComboBox ItemsSource="{Binding Controls.FreeResearchers}"
+                                  SelectedItem="{Binding Controls.SelectedRes}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Login}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <StackPanel Margin="0, 5">
+                            <TextBlock Text="Логин"
+                                   Style="{StaticResource font_style}"/>
+                            <TextBox Text="{Binding 
+                                Path=Controls.Login, 
+                                Mode=TwoWay, 
+                                UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock FontSize="18" 
+                                       TextWrapping="Wrap"
+                                       Text="При создании нового обучаемого, 
+                                       будет присвоен стандартный пароль:"
+                                       Style="{StaticResource font_style}"/>
+                            <TextBlock Text="User"
+                                       Style="{StaticResource font_style}"/>
+                        </StackPanel>
+                        <Button Content="Добавить пользователя"
+                                Command="{Binding AddUser}"/>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+            <Button Margin="0, 5" 
+                    Content="Сохранить"
+                    Command="{Binding Save}"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

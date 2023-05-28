@@ -1,0 +1,101 @@
+﻿<Window x:Class="View.Tutor.LookDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:src="clr-namespace:View.Tools" 
+        xmlns:controls="clr-namespace:View.Tutor.Controls"
+        mc:Ignorable="d" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen"
+        Height="550" Width="700" x:Name="LookDetails">
+    
+    <Grid  Background="Black">
+        
+        <!--#region  Background image-->
+        <Grid>
+            <Grid.Background>
+                <!--<ImageBrush x:Name="img_bg" ImageSource="./Resourses/Coin.jpg"/>-->
+                <SolidColorBrush x:Name="img_bg" Color="DarkGray"/>
+            </Grid.Background>
+        </Grid>
+        <!--#endregion-->
+
+        <Grid Margin="5">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="100" Text="Название:" 
+                           Style="{StaticResource font_style}"/>
+                        <TextBlock Width="500"
+                                   FontSize="14"
+                                   Text="{Binding Controls.Task.Name}"
+                                   Style="{StaticResource font_style}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="100" Text="Класс:" 
+                           Style="{StaticResource font_style}"/>
+                        <TextBlock Width="500" 
+                                   FontSize="14"
+                                   Text="{Binding Controls.Task.Discriminator}"
+                                   Style="{StaticResource font_style}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="100" Text="Тип:" 
+                           Style="{StaticResource font_style}"/>
+                        <TextBlock Width="500" 
+                                   FontSize="14"
+                                   Text="{Binding Controls.Task.Type}"
+                                   Style="{StaticResource font_style}"/>
+                    </StackPanel>
+                </StackPanel>
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Grid.Column="0" Margin="5">
+                        <TextBlock DockPanel.Dock="Top" 
+                               Margin="0,5"
+                               Text="Условие задачи"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Style="{StaticResource font_style}"/>
+                        <Border DockPanel.Dock="Top" BorderThickness="1" BorderBrush="White">
+                            <ScrollViewer Height="150" Width="315">
+                                <TextBlock TextWrapping="Wrap" FontSize="14"
+                                       Text="{Binding Controls.Task.Text}"
+                                       Style="{StaticResource font_style}"/>
+                            </ScrollViewer>
+                        </Border>
+                        <TextBlock DockPanel.Dock="Top" 
+                               Margin="0,5"
+                               Text="Пример кода .html" 
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center"
+                               Style="{StaticResource font_style}"/>
+                        <WebBrowser DockPanel.Dock="Top"
+                                src:WebBrowserHelper.Body="{Binding Controls.HtmlCode}"/>
+                    </DockPanel>
+
+                    <Grid Grid.Column="1" Margin="5">
+                        <controls:BaseMathDetalis_Control 
+                            x:Name="BaseMathDetalis"
+                            Visibility="{Binding Controls.BaseMath}"
+                            DataContext="{Binding ElementName=LookDetails, Path=DataContext}"/>
+                        <controls:MethodProgrammDetalis_Control 
+                            x:Name="MethodProgrammDetalis"
+                            Visibility="{Binding Controls.MethodProgramm}"
+                            DataContext="{Binding ElementName=LookDetails, Path=DataContext}"/>
+                        <controls:SelectKeyDetalis_Control 
+                            x:Name="SelectKeyDetalis"
+                            Visibility="{Binding Controls.SelectKey}"
+                            DataContext="{Binding ElementName=LookDetails, Path=DataContext}"/>
+                    </Grid>
+
+                </Grid>
+            </DockPanel>
+        </Grid>
+
+    </Grid>
+</Window>

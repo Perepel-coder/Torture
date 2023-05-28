@@ -1,0 +1,20 @@
+﻿<Window x:Class="View.Researcher.Scripts.ScriptTask_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:View.Researcher.Tasks.Controls"
+        mc:Ignorable="d"
+        Name="TaskWindow"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="650" Width="1000">
+    <Grid Background="Gray">
+        <controls:CombinationLock_Control Background="White"
+            x:Name="CombinationLock_Control"
+            Visibility="{Binding Controls.CombLock}"/>
+        <controls:Rocket_Control 
+            x:Name="Rocket_Control"
+            Visibility="{Binding Controls.Rocket}"/>
+    </Grid>
+</Window>
