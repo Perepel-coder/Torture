@@ -50,7 +50,7 @@ namespace Services.Crypto
         {
             return Encoding.GetString(data.ToArray());
         }
-        public static DataTable ToDataTableFromCFT(IEnumerable<byte> data)
+        public static DataTable ToTable_CFT(IEnumerable<byte> data)
         {
 
             try

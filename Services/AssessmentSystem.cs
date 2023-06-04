@@ -1,10 +1,6 @@
 ﻿using Services.Models;
 using Services.RequestDB.InterfaceDB;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -15,19 +11,20 @@ namespace Services
         {
             TMS = trainModuleService;
         }
-        public bool Assessment(Question_S question)
+        public int Assessment(Question_S question)
         {
+            int count = 0;
             var answers = TMS.GetAnswers(question.Id, false).ToList();
             for(int i = 0; i < answers.Count; i++)
             {
-                if(answers[i].Flag != question.Answers[i].Flag)
+                if(answers[i].Flag == question.Answers[i].Flag)
                 {
-                    return false;
+                    count++;
                 }
             }
-            return true;
+            return count / answers.Count * 100;
         }
-        public int Assessment(bool TaskCompleted, Counter counter)
+        public static int Assessment(bool TaskCompleted, Counter counter)
         {
             if (TaskCompleted)
             {
@@ -35,19 +32,21 @@ namespace Services
             }
             return 0;
         }
-        public void Assessment(ScriptUser_S script)
+        public static void Assessment(ScriptUser_S script)
         {
             double percentGQ =
-                ((double)script.Test.Questions.Sum(q => q.Score)) / 
-                ((double)script.Test.Questions.Count) * 100;
+                script.Test.Questions.Sum(q => q.Score) / 
+                (script.Test.Questions.Count * 100) * 100;
+
             script.Test.QuestionsScore =
                 (percentGQ < 30) ? 2 :
                 (percentGQ < 60) ? 3 :
                 (percentGQ < 90) ? 4 : 5;
 
             double percentGT = 
-                ((double)script.Test.Tasks.Sum(q => q.Score)) / 
-                ((double)script.Test.Tasks.Count) * 100;
+                script.Test.Tasks.Sum(q => q.Score) / 
+                script.Test.Tasks.Count * 100;
+
             script.Test.TasksScore =
                 (percentGT <= 10) ? 2 :
                 (percentGT <= 50) ? 3 :

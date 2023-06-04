@@ -28,14 +28,14 @@ namespace Services
                 Value + step < end ?
                 Value + step :
                 end;
-            return Value == end ? true : false;
+            return Value == end;
         }
         public bool Decrease()
         {
             Value =
                 Value - step > start ?
                 Value - step : start;
-            return Value == start ? true : false;
+            return Value == start;
         }
         public void Reset()
         {

@@ -43,14 +43,26 @@ namespace ViewModels.Models
             set => this.RaiseAndSetIfChanged(ref keySelection_V, value);
         }
 
-        public void VisibilityControl(
-            Visibility combLock_V = Visibility.Collapsed,
-            Visibility rocket_V = Visibility.Collapsed,
-            Visibility keySelection_V = Visibility.Collapsed)
+        public void Visi_CombLock()
         {
-            CombLock_V = combLock_V;
-            Rocket_V = rocket_V;
-            KeySelection_V = keySelection_V;
+            Collapsed_All();
+            CombLock_V = Visibility.Visible;
+        }
+        public void Visi_Rocket()
+        {
+            Collapsed_All();
+            Rocket_V = Visibility.Visible;
+        }
+        public void Visi_KeySelection()
+        {
+            Collapsed_All();
+            KeySelection_V = Visibility.Visible;
+        }
+        public void Collapsed_All()
+        {
+            CombLock_V = Visibility.Collapsed;
+            Rocket_V = Visibility.Collapsed;
+            KeySelection_V = Visibility.Collapsed;
         }
     }
 }

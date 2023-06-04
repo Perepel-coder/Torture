@@ -6,7 +6,6 @@ using System.Windows;
 using Autofac;
 using Services;
 using Services.Models;
-using ViewModels.Models.Tasks;
 
 namespace ViewModels.Interfaces
 {
@@ -21,17 +20,45 @@ namespace ViewModels.Interfaces
         public static User_S? User { get; set; }
         public static IContainer Builder { get; set; } = null!;
         public virtual string Name { get; set; } = typeof(BaseViewModel).Name;
-        public static void ErrorMessage(string msg, string? title = "Ошибка операции")
-        {
-            MessageBox.Show(msg, title,
-                 MessageBoxButton.OK,
-                 MessageBoxImage.Error);
-        }
         public static void InfoMessage(string msg, string? title = "Успешная операция")
         {
-            MessageBox.Show(msg, title,
-                 MessageBoxButton.OK,
-                 MessageBoxImage.Information);
+            MessageBox.Show(msg,title,MessageBoxButton.OK,MessageBoxImage.Information);
+        }
+
+        public static void ErrorMessage(string msg, string? title = "Ошибка операции")
+        {
+            MessageBox.Show(msg,title,MessageBoxButton.OK,MessageBoxImage.Error);
+        }
+        public static void ErrorFileMessage(string msg)
+        {
+            ErrorMessage(msg, "Ошибка взаимодействия с файлом");
+        }
+
+        public static string OpenFileMSG_GOOD(string filename)
+        {
+            return $"Файл: {filename} успешно открыт";
+        }
+        public static string OpenFileMSG_ERROR(string filename)
+        {
+            return $"Не удалось открыть файл: {filename}";
+        }
+
+        public static string SaveFileMSG_GOOD(string filename)
+        {
+            return $"Файл: {filename} успешно сохранен/изменен";
+        }
+        public static string SaveFileMSG_ERROR(string filename)
+        {
+            return $"Не удалось сохранить/изменить файл: {filename}";
+        }
+
+        public static bool IsVisibility(Visibility visibility)
+        {
+            if (visibility == Visibility.Visible)
+            {
+                return true;
+            }
+            return false;
         }
     }
     public abstract class TaskVM: BaseViewModel
@@ -48,7 +75,7 @@ namespace ViewModels.Interfaces
             Windows.Add(name, window);
         }
 
-        public static void Remove(string name, Type window)
+        public static void Remove(string name)
         {
             Windows.Remove(name);
         }
@@ -85,14 +112,7 @@ namespace ViewModels.Interfaces
         {
             Type type = Windows.Single(w => w.Key == name).Value;
             var window = BaseViewModel.Builder.Resolve(type) as Window;
-            if (window != null)
-            {
-                return window;
-            }
-            else
-            {
-                return null;
-            }
+            return window ??=  null;
         }
     }
 }

@@ -41,41 +41,38 @@ namespace Services.Tasks
                references: references,
                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-            using (var ms = new MemoryStream())
+            using var ms = new MemoryStream();
+            EmitResult result = compilation.Emit(ms);
+            if (!result.Success)
             {
-                EmitResult result = compilation.Emit(ms);
-
-                if (!result.Success)
+                IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
+                    diagnostic.IsWarningAsError ||
+                    diagnostic.Severity == DiagnosticSeverity.Error);
+                string msg = string.Empty;
+                foreach (Diagnostic diagnostic in failures)
                 {
-                    IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
-                        diagnostic.IsWarningAsError ||
-                        diagnostic.Severity == DiagnosticSeverity.Error);
-                    string msg = string.Empty;
-                    foreach (Diagnostic diagnostic in failures)
+                    msg += $"\n{diagnostic.Id}: {diagnostic.GetMessage()}";
+                }
+                throw new Exception(msg);
+            }
+            else
+            {
+                ms.Seek(0, SeekOrigin.Begin);
+                Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(ms);
+                Type? type = assembly.GetType(className);
+                if (type != null)
+                {
+                    var instance = Activator.CreateInstance(type);
+                    var meth = type.GetMethods().SingleOrDefault(m => m.Name == method);
+                    if (instance != null && meth != null)
                     {
-                        msg += $"\n{diagnostic.Id}: {diagnostic.GetMessage()}";
+                        return new CompilerOut(instance, meth);
                     }
-                    throw new Exception(msg);
+                    throw new Exception($"Не удалось найти текущий метод {meth}");
                 }
                 else
                 {
-                    ms.Seek(0, SeekOrigin.Begin);
-                    Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(ms);
-                    Type? type = assembly.GetType(className);
-                    if (type != null)
-                    {
-                        var instance = Activator.CreateInstance(type);
-                        var meth = type.GetMethods().SingleOrDefault(m => m.Name == method);
-                        if (instance != null && meth != null)
-                        {
-                            return new CompilerOut(instance, meth);
-                        }
-                        throw new Exception($"Не удалось найти текущий метод {meth}");
-                    }
-                    else
-                    {
-                        throw new Exception($"Не удалось найти текущий тип {className}");
-                    }
+                    throw new Exception($"Не удалось найти текущий тип {className}");
                 }
             }
         }

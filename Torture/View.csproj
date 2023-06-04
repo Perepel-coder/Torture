@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <None Remove="Researcher\Resourses\Close.png" />
     <None Remove="Researcher\Resourses\Coin.jpg" />

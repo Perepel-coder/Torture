@@ -10,10 +10,9 @@ namespace Services
             Type? type = Assembly.Load(nameBuild).GetType(nameType);
             if (type != null)
             {
-                T? result = Activator.CreateInstance(type, args) as T;
-                return result == null ?
-                    throw new Exception("Не возможно создать экземпляр текущего типа") :
-                    result;
+                return Activator.CreateInstance(type, args) is T result ?
+                    result:
+                    throw new Exception("Не возможно создать экземпляр текущего типа");
             }
             else
             {

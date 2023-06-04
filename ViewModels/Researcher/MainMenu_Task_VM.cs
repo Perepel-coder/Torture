@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Services.RequestDB.InterfaceDB;
-using System.Windows;
 using System.Windows.Input;
 using ViewModels.Interfaces;
 using ViewModels.Models;
@@ -13,7 +12,7 @@ namespace ViewModels.Researcher
         private readonly ITrainModuleService TMS;
         public MainMenu_Task_Controls Controls { get; set; }
 
-        public MainMenu_Task_VM (
+        public MainMenu_Task_VM(
             MainMenu_Task_Controls controls,
             ITrainModuleService TMS)
         {
@@ -21,7 +20,7 @@ namespace ViewModels.Researcher
             Controls = controls;
             this.TMS = TMS;
             Controls.Tasks = new(TMS.GetTasks());
-            Controls.VisibilityControl();
+            Controls.Collapsed_All();
         }
 
         private RelayCommand? getTask;
@@ -36,21 +35,21 @@ namespace ViewModels.Researcher
                         var task = TMS.GetBasicMath(
                             Controls.SelectTask.Id,
                             Controls.SelectTask.Type);
-                        Controls.VisibilityControl(combLock_V: Visibility.Visible);
+                        Controls.Visi_CombLock();
                         Controls.CurrentVM_MenuTasks = Builder.Resolve<CombLock_VM>(
                             new NamedParameter("Task", task));
                     }
                     if (Controls.SelectTask.Discriminator == "MethodProgramm")
                     {
                         var task = TMS.GetMethodP(Controls.SelectTask.Id);
-                        Controls.VisibilityControl(rocket_V: Visibility.Visible);
+                        Controls.Visi_Rocket();
                         Controls.CurrentVM_MenuTasks = Builder.Resolve<Rocket_VM>(
                             new NamedParameter("Task", task));
                     }
-                    if(Controls.SelectTask.Discriminator == "SelectKey")
+                    if (Controls.SelectTask.Discriminator == "SelectKey")
                     {
                         var task = TMS.GetSelectKey(Controls.SelectTask.Id);
-                        Controls.VisibilityControl(keySelection_V: Visibility.Visible);
+                        Controls.Visi_KeySelection();
                         Controls.CurrentVM_MenuTasks = Builder.Resolve<KeySelect_VM>(
                             new NamedParameter("Task", task));
                     }

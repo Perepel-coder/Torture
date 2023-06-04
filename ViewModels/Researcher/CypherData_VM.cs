@@ -11,7 +11,6 @@ using ViewModels.Models;
 using trans = Services.Crypto.TransformData;
 using dtype = ViewModels.Models.CypherData_Controls.DataType;
 using ftype = Services.DialogService.FileType;
-using v = System.Windows.Visibility;
 using System.Linq;
 using ViewModels.Interfaces;
 
@@ -35,7 +34,7 @@ namespace ViewModels.Researcher
             Controls.ListOfAlg = new(CAS.GetAlgs("Одноключевой"));
             Controls.ListOfAlgMode = new(CAS.GetModes());
             Controls.Tools.Dchar = '~';
-            Controls.Tools.Key = "Моя соседка крутая.";
+            Controls.Tools.Key = "Something scientifically boring";
             Controls.Tools.Vec = 1234;
             Controls.Tools.Way = "Зашифровать";
             Controls.Tools.Alg = Controls.ListOfAlg.FirstOrDefault();
@@ -60,68 +59,57 @@ namespace ViewModels.Researcher
                     {
                         try
                         {
-                            var table = v.Collapsed;
-                            var image = v.Collapsed;
-                            var text = v.Collapsed;
-                            Controls.VisiProgressBar = v.Visible;
+                            if (Controls.InData == null ||
+                            Controls.InDataCode == null ||
+                            Controls.InData.GetType() == typeof(object))
+                            {
+                                return;
+                            }
+
                             Controls.IsEnabledButtonTransform = false;
+                            Controls.ProgressBar_ON();
 
                             encrypt.Registration(Controls.Tools, Controls.InDataCode);
                             var bytes = (Controls.Tools.Way == "Зашифровать") ?
                             encrypt.Encode() :
                             encrypt.Decode();
 
-                            if (Controls.CurrentType == dtype.TEXT)
+                            switch (Controls.CurrentType)
                             {
-                                if (Controls.VisiProj_Text != v.Collapsed)
-                                {
+                                case dtype.TEXT:
                                     Set_DataCodeType(trans.ToString(bytes), trans.ToInt(bytes));
-                                }
-                                else
-                                {
-                                    Set_DataCodeType(trans.ToString(bytes), trans.ToInt(bytes), out text);
-                                }
+                                    if (!IsVisibility(Controls.VisiProj_Text))
+                                        Controls.Visi_Text();
+                                    goto default;
+                                case dtype.TABLE:
+                                    if (DS.SaveFileDialog("CryptoTable files|*.ctf") == true)
+                                    {
+                                        FileStream stream = new(DS.FilePath, FileMode.Create, FileAccess.Write);
+                                        StreamProcess.SaveFile_CTF(bytes, stream);
+                                        Set_DataCodeType(trans.ToString(bytes), trans.ToInt(bytes));
+                                        Controls.StatusBar = SaveFileMSG_GOOD(DS.FileName);
+                                        Controls.CurrentType = dtype.CFT;
+                                        Controls.Visi_Text();
+                                    }
+                                    goto default;
+                                case dtype.CFT:
+                                    Set_DataCodeType(trans.ToTable_CFT(bytes), trans.ToInt(bytes));
+                                    Controls.CurrentType = dtype.TABLE;
+                                    Controls.Visi_Table();
+                                    goto default;
+                                default:
+                                    Controls.ProgressBar_OFF();
+                                    Controls.IsEnabledButtonTransform = true;
+                                    return;
                             }
-                            else if (Controls.CurrentType == dtype.TABLE)
-                            {
-                                if (DS.SaveFileDialog("CryptoTable files|*.ctf") == true)
-                                {
-                                    FileStream stream = new(DS.FilePath, FileMode.Create, FileAccess.Write);
-                                    StreamProcess.SaveFile_CTF(bytes, stream);
-                                    Set_DataCodeType(trans.ToString(bytes), trans.ToInt(bytes), out text);
-                                    Controls.CurrentType = dtype.CFT;
-                                    Controls.StatusBar = $"Файл {DS.FileName} успешно сохранен.";
-                                }
-                                else
-                                {
-                                    table = v.Visible;
-                                }
-                            }
-                            else if (Controls.CurrentType == dtype.CFT)
-                            {
-                                Set_DataCodeType(
-                                    trans.ToDataTableFromCFT(bytes),
-                                    trans.ToInt(bytes),
-                                    out table);
-                                Controls.CurrentType = dtype.TABLE;
-                            }
-                            Controls.Visi_TableImageText(table, image, text);
-                            Controls.VisiProgressBar = v.Collapsed;
-                            Controls.IsEnabledButtonTransform = true;
                         }
                         catch (Exception ex)
                         {
-                            Controls.VisiProgressBar = v.Collapsed;
+                            Controls.ProgressBar_OFF();
                             Controls.IsEnabledButtonTransform = true;
                             ErrorMessage(ex.Message, "Ошибка преобразования данных.");
                         }
                     });
-                    if (Controls.InData == null ||
-                    Controls.InDataCode == null ||
-                    Controls.InData.GetType() == typeof(object))
-                    {
-                        return;
-                    }
                     thread.Start();
                 });
             }
@@ -139,14 +127,11 @@ namespace ViewModels.Researcher
                             try
                             {
                                 FileStream stream = new(DS.FilePath, FileMode.Open);
-                                var table = v.Collapsed;
-                                var image = v.Collapsed;
-                                var text = v.Collapsed;
                                 if (DS.TypeFile == ftype.TEXT || DS.TypeFile == ftype.CTF)
                                 {
                                     IEnumerable<byte> bytes = StreamProcess.OpenFile(stream);
                                     Controls.InData = trans.ToString(bytes);
-                                    text = v.Visible;
+                                    Controls.Visi_Text();
                                     Controls.CurrentType = (DS.TypeFile == ftype.TEXT) ?
                                     dtype.TEXT : dtype.CFT;
                                 }
@@ -155,17 +140,15 @@ namespace ViewModels.Researcher
                                     Controls.InData = StreamProcess.OpenFileDT(stream);
                                     Controls.InDataCode = trans.ToInt((DataTable)Controls.InData);
                                     Controls.CurrentType = dtype.TABLE;
-                                    table = v.Visible;
+                                    Controls.Visi_Table();
                                 }
-                                Controls.Visi_TableImageText(table, image, text);
-                                Controls.VisiProj_Text = v.Collapsed;
                                 stream.Close();
-                                Controls.StatusBar = $"Файл {DS.FileName} успешно открыт.";
+                                Controls.StatusBar = OpenFileMSG_GOOD(DS.FileName);
                             }
                             catch (Exception ex)
                             {
-                                Controls.StatusBar = $"Файл {DS.FileName} не может быть открыт";
-                                ErrorMessage(ex.Message, "Ошибка при открытии файла");
+                                Controls.StatusBar = OpenFileMSG_ERROR(DS.FileName);
+                                ErrorFileMessage(ex.Message);
                             }
                             
                         });
@@ -215,13 +198,13 @@ namespace ViewModels.Researcher
                                             break;
                                     }
                                 }
-                                Controls.StatusBar = $"Файл {DS.FileName} успешно открыт.";
+                                Controls.StatusBar = OpenFileMSG_GOOD(DS.FileName);
                                 stream.Close();
                             }
                             catch (Exception ex)
                             {
-                                Controls.StatusBar = $"Файл {DS.FileName} не может быть открыт";
-                                ErrorMessage(ex.Message, "Ошибка при открытии файла");
+                                Controls.StatusBar = OpenFileMSG_ERROR(DS.FileName);
+                                ErrorFileMessage(ex.Message);
                             }
                         });
                         thread.Start();
@@ -237,8 +220,7 @@ namespace ViewModels.Researcher
                 {
                     Controls.CurrentType = dtype.TEXT;
                     Controls.InData = "Ваш новый проект!";
-                    Controls.Visi_TableImageText(v.Collapsed, v.Collapsed, v.Collapsed);
-                    Controls.VisiProj_Text = v.Visible;
+                    Controls.Visi_ProjTXT();
                 });
             }
         }
@@ -258,7 +240,7 @@ namespace ViewModels.Researcher
                                 {
                                     FileStream stream = new(DS.FilePath, FileMode.Create, FileAccess.Write);
                                     StreamProcess.SaveFile_TXT_DOCX(Controls.InDataCode, stream);
-                                    Controls.StatusBar = $"Файл {DS.FileName} успешно сохранен.";
+                                    Controls.StatusBar = SaveFileMSG_GOOD(DS.FileName);
                                     stream.Close();
                                 }
                             }
@@ -267,11 +249,10 @@ namespace ViewModels.Researcher
                                 if (DS.SaveFileDialog("Excel Files|*.xls;*.xlsx;*.xlsm"))
                                 {
                                     FileStream stream = new(DS.FilePath, FileMode.Create, FileAccess.Write);
-                                    DataTable? table = Controls.InData as DataTable;
-                                    if (table != null)
+                                    if(Controls.InData is DataTable table)
                                     {
                                         StreamProcess.SaveFile_EXCEL(table, stream);
-                                        Controls.StatusBar = $"Файл {DS.FileName} успешно сохранен.";
+                                        Controls.StatusBar = SaveFileMSG_GOOD(DS.FileName);
                                         stream.Close();
                                     }
                                 }
@@ -279,8 +260,8 @@ namespace ViewModels.Researcher
                         }
                         catch (Exception ex)
                         {
-                            Controls.StatusBar = $"Файл {DS.FileName} не может быть создан/изменен";
-                            ErrorMessage(ex.Message, "Ошибка при сохранении файла");
+                            Controls.StatusBar = SaveFileMSG_ERROR(DS.FileName);
+                            ErrorFileMessage(ex.Message);
                         }
                         
                     });
@@ -296,36 +277,28 @@ namespace ViewModels.Researcher
                 {
                     Thread thread = new(() =>
                     {
-                        if (DS.SaveFileDialog("CryptoTable files|*.xml"))
+                        try
                         {
-                            FileStream stream = new (DS.FilePath, FileMode.Create, FileAccess.Write);
-                            StreamProcess.SaveFile_XML(Controls.Tools, stream, rootName);
-                            Controls.StatusBar = $"Файл {DS.FileName} успешно сохранен.";
-                            stream.Close();
+                            if (DS.SaveFileDialog("CryptoTable files|*.xml"))
+                            {
+                                FileStream stream = new(DS.FilePath, FileMode.Create, FileAccess.Write);
+                                StreamProcess.SaveFile_XML(Controls.Tools, stream, rootName);
+                                Controls.StatusBar = SaveFileMSG_GOOD(DS.FileName);
+                                stream.Close();
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            Controls.StatusBar = SaveFileMSG_ERROR(DS.FileName);
+                            ErrorFileMessage(ex.Message);
+                        }  
                     });
-                    try
-                    {
-                        thread.Start();
-                    }
-                    catch (Exception ex)
-                    {
-                        Controls.StatusBar = 
-                        $"Ошибка при сохранении файла {DS.FileName}! " +
-                        $"Файл не был сохранен.";
-                        ErrorMessage(ex.Message, "Ошибка при сохранении файла настроек");
-                    }
+                    thread.Start();
                 });
             }
         }
 
-        public void Set_DataCodeType<T>(T data, IEnumerable<int> code, out v visi)
-        {
-            Controls.InData = data;
-            Controls.InDataCode = code;
-            visi = v.Visible;
-        }
-        public void Set_DataCodeType<T>(T data, IEnumerable<int> code)
+        private void Set_DataCodeType<T>(T data, IEnumerable<int> code)
         {
             Controls.InData = data;
             Controls.InDataCode = code;

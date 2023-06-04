@@ -222,7 +222,7 @@ namespace Services
             {
                 QuestionNum = q.Id,
                 Text = q.Text,
-                Score = assessment.Assessment(q) ? 1 : 0
+                Score = assessment.Assessment(q)
             });
         }
         private IEnumerable<TaskUser_S> GetTasks(IEnumerable<ATask> tasks)
@@ -262,8 +262,9 @@ namespace Services
         }
         public bool SaveScript(ScriptUser_S script, int userID)
         {
-            var res = researcherRepo.Get(userID);
-            var Scripts = researcherRepo.Get(userID).Scripts;
+            var Scripts = researcherRepo
+                .Include("Scripts")
+                .Single(r=>r.ID == userID).Scripts;
             if (Scripts == null)
             {
                 Scripts = new();

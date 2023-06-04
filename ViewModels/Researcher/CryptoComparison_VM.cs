@@ -30,8 +30,11 @@ namespace ViewModels.Researcher
             this.stopwatchService = stopwatchService;
             Controls.ListOfAlg = new(cryptoAlgService.GetAlgs());
             Controls.ListOfAlgMode = new(cryptoAlgService.GetModes());
-            Controls.ListOfAlg.First().Flag = true;
-            Controls.ListOfAlgMode.First().Flag = true;
+
+            if (Controls.ListOfAlg.Count != 0)
+                Controls.ListOfAlg.First().Flag = true;
+            if(Controls.ListOfAlgMode.Count != 0)
+                Controls.ListOfAlgMode.First().Flag = true;
         }
 
         private RelayCommand? comparisonBlockAlg;

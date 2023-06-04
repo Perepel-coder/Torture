@@ -15,20 +15,17 @@ namespace ViewModels.Researcher.Script
         public TaskScript_Panel_Controls Controls { get; set; }
         private readonly ITrainModuleService TMS;
         private readonly IUserService US;
-        private readonly AssessmentSystem score;
         private readonly ScriptUser_S userScript;
         public TaskScript_Panel_VM(
             TaskScript_Panel_Controls controls,
             ITrainModuleService trainModuleService,
             IUserService userService,
-            AssessmentSystem assessment,
             AScript script,
             ScriptUser_S userScript)
         {
             Controls = controls;
             TMS = trainModuleService;
             US = userService;
-            this.score = assessment;
             Controls.Script = script as Script_S;
             this.userScript = userScript;
         }
@@ -67,7 +64,7 @@ namespace ViewModels.Researcher.Script
                             userScript.Test.Tasks = new();
                         }
                         userScript.Test.Tasks.Single(t => t.TaskNum == task.Id).Score = 
-                        score.Assessment(model.TaskCompleted, model.Counter);
+                        AssessmentSystem.Assessment(model.TaskCompleted, model.Counter);
                     }
                 });
             }
@@ -78,8 +75,15 @@ namespace ViewModels.Researcher.Script
             {
                 return saveResult ??= new RelayCommand(obj =>
                 {
-                    score.Assessment(userScript);
-                    US.SaveScript(userScript, User.ID);
+                    AssessmentSystem.Assessment(userScript);
+                    if(US.SaveScript(userScript, User.ID))
+                    {
+                        InfoMessage("Результаты сохранены!");
+                    }
+                    else
+                    {
+                        InfoMessage("Произошла ошибка! Результаты небыли сохранены!");
+                    }
                 });
             }
         }

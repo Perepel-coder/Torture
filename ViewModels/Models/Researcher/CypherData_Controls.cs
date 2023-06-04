@@ -2,7 +2,6 @@
 using Services.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using trans = Services.Crypto.TransformData;
 
@@ -31,7 +30,7 @@ namespace ViewModels.Models
             }
         }
 
-        private Visibility visibilityProgressBar;
+        private Visibility progressBar;
         private bool isEnabledButtonTransform;
 
         public bool IsEnabledButtonTransform
@@ -39,10 +38,10 @@ namespace ViewModels.Models
             get => isEnabledButtonTransform;
             set => this.RaiseAndSetIfChanged(ref isEnabledButtonTransform, value);
         }
-        public Visibility VisiProgressBar
+        public Visibility ProgressBar
         {
-            get => visibilityProgressBar;
-            set => this.RaiseAndSetIfChanged(ref visibilityProgressBar, value);
+            get => progressBar;
+            set => this.RaiseAndSetIfChanged(ref progressBar, value);
         }
 
         private string statusBar;
@@ -77,11 +76,42 @@ namespace ViewModels.Models
             set => this.RaiseAndSetIfChanged(ref visiProjectText, value);
         }
 
-        public void Visi_TableImageText(Visibility dg, Visibility image, Visibility text)
+        public void Visi_Table()
         {
-            VisiDataGrid = dg;
-            VisiImage = image;
-            VisiTextBlock = text;
+            Collaps_All();
+            VisiDataGrid = Visibility.Visible;
+        }
+        public void Visi_Text()
+        {
+            Collaps_All();
+            VisiTextBlock = Visibility.Visible;
+        }
+        public void Visi_Image()
+        {
+            Collaps_All();
+            VisiImage = Visibility.Visible;
+        }
+        public void Visi_ProjTXT()
+        {
+            Collaps_All();
+            VisiProj_Text = Visibility.Visible;
+        }
+
+        public void ProgressBar_ON()
+        {
+            ProgressBar = Visibility.Visible;
+        }
+        public void ProgressBar_OFF()
+        {
+            ProgressBar = Visibility.Collapsed;
+        }
+
+        public void Collaps_All()
+        {
+            VisiDataGrid = Visibility.Collapsed;
+            VisiImage = Visibility.Collapsed;
+            VisiTextBlock = Visibility.Collapsed;
+            VisiProj_Text = Visibility.Collapsed;
         }
 
         public CypherData_Controls(CypherTools tools)
@@ -94,9 +124,9 @@ namespace ViewModels.Models
             visiDataGrid = Visibility.Collapsed;
             visiImage = Visibility.Collapsed;
             visiTextBlock = Visibility.Collapsed;
-            visibilityProgressBar = Visibility.Collapsed;
+            progressBar = Visibility.Collapsed;
             visiProjectText = Visibility.Collapsed;
-            isEnabledButtonTransform = true;;
+            isEnabledButtonTransform = true;
         }
     }
 }

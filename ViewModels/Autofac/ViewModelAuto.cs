@@ -93,7 +93,6 @@ namespace ViewModels.Autofac
                 c.Resolve<TaskScript_Panel_Controls>(),
                 c.Resolve<ITrainModuleService>(),
                 c.Resolve<IUserService>(),
-                c.Resolve<AssessmentSystem>(),
                 p.Named<AScript>("Script"),
                 p.Named<ScriptUser_S>("UserScript")))
                 .AsSelf();
