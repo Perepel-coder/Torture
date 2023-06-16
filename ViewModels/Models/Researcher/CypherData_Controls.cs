@@ -127,6 +127,7 @@ namespace ViewModels.Models
             progressBar = Visibility.Collapsed;
             visiProjectText = Visibility.Collapsed;
             isEnabledButtonTransform = true;
+            ProgressBar_OFF();
         }
     }
 }

@@ -59,6 +59,8 @@ namespace Models
         public string Discriminator { get; set; } = null!;
         public List<Test> Tests { get; set; } = null!;
     }
+
+
     public class BaseMath : Task
     {
         public int? Key_One { get; set; }

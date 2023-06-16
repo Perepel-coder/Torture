@@ -15,7 +15,8 @@ namespace Services.Crypto
             get
             {
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-                return Encoding.GetEncoding(1251);
+                //return Encoding.GetEncoding("windows-1251");
+                return Encoding.UTF8;
             }
         }
 

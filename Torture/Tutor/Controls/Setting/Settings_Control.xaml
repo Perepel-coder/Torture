@@ -31,14 +31,14 @@
                         Width="500" x:Name="Settings_Panel"
                         Grid.Row="1" Grid.ColumnSpan="3">
                 <Button Height="40" Margin="5" FontSize="20"
-                        Content="Зарегестрировать нового куратора"
+                        Content="Регистрация нового инструктора"
                         x:Name="CuratorRegistration_BTN"
                         Click="CuratorRegistration_BTN_Click"
                         Command="{Binding CuratorReg}"/>
-                <Button Height="40" Margin="5" FontSize="20"
+                <!--<Button Height="40" Margin="5" FontSize="20"
                         Content="Управление обучаемыми"/>
                 <Button Height="40" Margin="5" FontSize="20"
-                        Content="Управление темами обучающих сценариев"/>
+                        Content="Управление темами обучающих сценариев"/>-->
                 <Button Height="40" Margin="5" FontSize="20" 
                         Name="CreatQuestions_BTN"
                         Content="Управление тестовыми вопросами"

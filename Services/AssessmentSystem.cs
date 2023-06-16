@@ -1,5 +1,6 @@
 ﻿using Services.Models;
 using Services.RequestDB.InterfaceDB;
+using System;
 using System.Linq;
 
 namespace Services
@@ -13,7 +14,7 @@ namespace Services
         }
         public int Assessment(Question_S question)
         {
-            int count = 0;
+            double count = 0;
             var answers = TMS.GetAnswers(question.Id, false).ToList();
             for(int i = 0; i < answers.Count; i++)
             {
@@ -22,7 +23,7 @@ namespace Services
                     count++;
                 }
             }
-            return count / answers.Count * 100;
+            return (int)((count / answers.Count) * 100);
         }
         public static int Assessment(bool TaskCompleted, Counter counter)
         {

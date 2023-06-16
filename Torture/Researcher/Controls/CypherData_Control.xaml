@@ -117,7 +117,7 @@
             <DockPanel>
                 <ProgressBar DockPanel.Dock="Bottom" Height="25" IsIndeterminate="True" 
                              Foreground="DarkBlue"
-                             Visibility="{Binding Controls.VisiProgressBar}"/>
+                             Visibility="{Binding Controls.ProgressBar}"/>
                 <StatusBar DockPanel.Dock="Bottom">
                     <StatusBarItem>
                         <TextBlock Text="{Binding Controls.StatusBar}"/>
