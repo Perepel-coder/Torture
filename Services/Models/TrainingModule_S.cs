@@ -44,6 +44,16 @@ namespace Services.Models
     }
     public class SelectKey_S : ATask, ICompiler_S
     {
+        public SelectKey_S() { }
+        public SelectKey_S(ATask task)
+        {
+            Id = task.Id;
+            Name = task.Name;
+            Text = task.Text;
+            Type = task.Type;
+            Discriminator = task.Discriminator;
+            CodeHTML = task.CodeHTML;
+        }
         public string ClassName { get; set; } = null!;
         public string MethodName { get; set; } = null!;
         public string Answer { get; set; } = null!;

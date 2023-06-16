@@ -11,9 +11,6 @@ using ViewModels.Interfaces;
 using ViewModels.Models.Tasks;
 using Services;
 using System.IO;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace ViewModels.Researcher.Tasks
 {
@@ -36,29 +33,30 @@ namespace ViewModels.Researcher.Tasks
             Controls.ListOfAlg = new(CAS.GetAlgs("Одноключевой"));
             Controls.Tools.Alg = Controls.ListOfAlg.FirstOrDefault();
             Controls.Tools.Mode = Controls.ListOfAlgMode.FirstOrDefault();
-            Set((SelectKey_S)task);
+            Set(task);
         }
-        private void Set(SelectKey_S task)
+        private void Set(ATask task)
         {
-            Controls.TextTask = task.Text;
-            Controls.ClassName = task.ClassName;
-            Controls.MethodName = task.MethodName;
+            SelectKey_S selectKey = (SelectKey_S)task;
+            Controls.TextTask = selectKey.Text;
+            Controls.ClassName = selectKey.ClassName;
+            Controls.MethodName = selectKey.MethodName;
             Controls.HtmlCode =
                 Environment.CurrentDirectory +
                 @"\Researcher\Tasks\Resourses\" +
                 task.CodeHTML;
             string filepath = Environment.CurrentDirectory +
                 @"\Researcher\Tasks\Resourses\Files\" +
-                task.EncryptMSG;
+                selectKey.EncryptMSG;
             FileStream stream = new(filepath, FileMode.Open);
             Controls.EncryptMSG = trans.ToString(StreamProcess.OpenFile(stream));
-            Controls.TrueAnswer = task.Answer;
+            Controls.TrueAnswer = selectKey.Answer;
             Controls.Tools.Dchar = '~';
             Controls.Tools.Vec = 1234;
             var temp = CreatTask_XML.ReadTestCases_XML<object>(
                 Environment.CurrentDirectory +
                 @"\Researcher\Tasks\Resourses\Files\" +
-                task.Alphabet);
+                selectKey.Alphabet);
             Controls.Alphabet[0] = Tester
                 .CastArrays<char>(temp.First().First() as Array)
                 .ToArray();

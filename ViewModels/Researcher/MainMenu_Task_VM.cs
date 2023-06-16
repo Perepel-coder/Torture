@@ -41,7 +41,7 @@ namespace ViewModels.Researcher
                     }
                     if (Controls.SelectTask.Discriminator == "MethodProgramm")
                     {
-                        var task = TMS.GetMethodP(Controls.SelectTask.Id);
+                        var task = TMS.GetMethodProgram(Controls.SelectTask.Id);
                         Controls.Visi_Rocket();
                         Controls.CurrentVM_MenuTasks = Builder.Resolve<Rocket_VM>(
                             new NamedParameter("Task", task));

@@ -16,6 +16,14 @@ namespace ViewModels.Researcher.Tasks
 
         private Image? image;
 
+        public CombLock_VM(
+            CombLock_Controls controls,
+            ATask task)
+        {
+            Name = typeof(CombLock_VM).Name;
+            Controls = controls;
+            Set(task);
+        }
         private void Set(ATask task)
         {
             BaseMath_S baseMath = (BaseMath_S)task;
@@ -40,27 +48,18 @@ namespace ViewModels.Researcher.Tasks
                 Controls.Answer = Controls.Answer.Substring(4);
             }
 
-            if(baseMath.GetType() == typeof(MultPoly))
+            if (baseMath.Type == typeof(MultPoly).Name)
             {
                 Controls.FuncTask = MultPoly.Answer;
             }
-            if(baseMath.GetType() == typeof(DivPoly))
+            if (baseMath.Type == typeof(DivPoly).Name)
             {
                 Controls.FuncTask = DivPoly.Answer;
             }
-            if (baseMath.GetType() == typeof(SumPoly))
+            if (baseMath.Type == typeof(SumPoly).Name)
             {
-                Controls.FuncTask = DivPoly.Answer;
+                Controls.FuncTask = SumPoly.Answer;
             }
-        }
-
-        public CombLock_VM(
-            CombLock_Controls controls,
-            ATask task)
-        {
-            Name = typeof(CombLock_VM).Name;
-            Controls = controls;
-            Set(task);
         }
 
         private RelayCommand? setCode;

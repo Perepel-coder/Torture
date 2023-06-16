@@ -8,8 +8,8 @@ namespace Services.RequestDB.InterfaceDB
         IEnumerable<ATask> GetTasks();
         IEnumerable<ATask> GetTasks(string Discriminator);
         BaseMath_S GetBasicMath(int Id, string? type=null);
-        IEnumerable<MethodProgramm_S> GetMethodPs();
-        MethodProgramm_S GetMethodP(int id);
+        IEnumerable<MethodProgramm_S> GetMethodPrograms();
+        MethodProgramm_S GetMethodProgram(int id);
         SelectKey_S GetSelectKey(int id);
 
         IEnumerable<Topic_S> GetTopics();

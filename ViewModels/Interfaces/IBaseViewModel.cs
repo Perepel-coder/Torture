@@ -17,7 +17,7 @@ namespace ViewModels.Interfaces
     }
     public abstract class BaseViewModel
     {
-        public static User_S? User { get; set; }
+        public static User_S User { get; set; } = null!;
         public static IContainer Builder { get; set; } = null!;
         public virtual string Name { get; set; } = typeof(BaseViewModel).Name;
         public static void InfoMessage(string msg, string? title = "Успешная операция")

@@ -52,17 +52,15 @@ namespace ViewModels.Researcher.Script
                         }
                         if (Controls.SelectTask.Discriminator == "MethodProgramm")
                         {
-                            task = TMS.GetMethodP(Controls.SelectTask.Id);
+                            task = TMS.GetMethodProgram(Controls.SelectTask.Id);
                             model = Builder.Resolve<Rocket_VM>(
                                 new NamedParameter("Task", task));
                             
                         }
                         AppWindows.ShowDialog(AppWindows.SetDataContext("ScriptTask", model));
 
-                        if(userScript.Test.Tasks == null)
-                        {
-                            userScript.Test.Tasks = new();
-                        }
+                        userScript.Test.Tasks ??= new();
+
                         userScript.Test.Tasks.Single(t => t.TaskNum == task.Id).Score = 
                         AssessmentSystem.Assessment(model.TaskCompleted, model.Counter);
                     }

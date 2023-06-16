@@ -68,6 +68,7 @@ namespace Services.RequestDB
                 Type = task.Type,
                 Poly1 = task.Key_One,
                 Poly2 = task.Key_Two,
+                Discriminator = task.Discriminator,
                 Module = task.Module,
                 CodeHTML = (task.CodeHTML != null) ? task.CodeHTML : "NULL"
             };
@@ -85,11 +86,11 @@ namespace Services.RequestDB
             }
             if (Type.GetType("Services.Models." + type) == typeof(SumPoly))
             {
-                return new DivPoly(basemath);
+                return new SumPoly(basemath);
             }
             throw new Exception("Тип задачи не определен");
         }
-        public IEnumerable<MethodProgramm_S> GetMethodPs()
+        public IEnumerable<MethodProgramm_S> GetMethodPrograms()
         {
             return methodPRepo.GetAll().Select(t =>
             new MethodProgramm_S
@@ -105,7 +106,7 @@ namespace Services.RequestDB
                 TestCases = t.TestCases
             });
         }
-        public MethodProgramm_S GetMethodP(int id)
+        public MethodProgramm_S GetMethodProgram(int id)
         {
             var task = methodPRepo.Get(id);
             return new MethodProgramm_S
@@ -117,6 +118,7 @@ namespace Services.RequestDB
                 ClassName = task.ClassName,
                 MethodName = task.MethodName,
                 Answer = task.Answer,
+                Discriminator = task.Discriminator,
                 CodeHTML = (task.CodeHTML != null) ? task.CodeHTML : "NULL",
                 TestCases = task.TestCases
             };
@@ -132,6 +134,7 @@ namespace Services.RequestDB
                 Type = task.Type,
                 ClassName = task.ClassName,
                 MethodName = task.MethodName,
+                Discriminator= task.Discriminator,
                 Answer = task.Answer,
                 CodeHTML = (task.CodeHTML != null) ? task.CodeHTML : "NULL",
                 EncryptMSG = task.EncryptMSG,

@@ -8,6 +8,7 @@
   </PropertyGroup>
 	
   <ItemGroup>
+    <None Remove="Cryptoalgorithm.db" />
     <None Remove="Researcher\Resourses\Close.png" />
     <None Remove="Researcher\Resourses\Coin.jpg" />
     <None Remove="Researcher\Resourses\Crypto.png" />
@@ -33,13 +34,18 @@
     <None Remove="Researcher\Tasks\Resourses\SelectKey.html" />
     <None Remove="Researcher\Tasks\Resourses\SumOfPolyGF.html" />
     <None Remove="Researcher\Tasks\Resourses\Treasure.gif" />
+    <None Remove="TrainingModule.db" />
     <None Remove="Tutor\Resourses\Alg.png" />
     <None Remove="Tutor\Resourses\setting.png" />
     <None Remove="Tutor\Resourses\Train.png" />
     <None Remove="Tutor\Resourses\User.png" />
+    <None Remove="User.db" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Cryptoalgorithm.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Researcher\Scripts\Resourses\AESScript_Part1.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -55,21 +61,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_A.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_TC.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_A.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_TC.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Researcher\Tasks\Resourses\Files\SelectKey_Task1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_A.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\Files\CompilerDivPoly_Task1_TC.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_A.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\Files\CompilerMultPoly_Task1_TC.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\Files\SelectKey_Task1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Tasks\Resourses\Files\SelectKey_Task1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainingModule.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Resource Include="Researcher\Tasks\Resourses\Rocket.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

@@ -1,8 +1,6 @@
 ﻿using Autofac;
 using Services.Models;
 using Services.RequestDB.InterfaceDB;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using ViewModels.Interfaces;
 using ViewModels.Models.Script;

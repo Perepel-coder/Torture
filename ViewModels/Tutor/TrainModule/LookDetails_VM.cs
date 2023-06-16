@@ -33,7 +33,7 @@ namespace ViewModels.Tutor.TrainModule
             if(Controls.Task.Discriminator == "MethodProgramm")
             {
                 Controls.MethodProgramm = Visibility.Visible;
-                Controls.MethodProgrammTask = TMS.GetMethodP(task.Id);
+                Controls.MethodProgrammTask = TMS.GetMethodProgram(task.Id);
                 Controls.MethodProgrammTask.TestCases = StreamProcess.Read_XML(
                     Environment.CurrentDirectory +
                     @"\Researcher\Tasks\Resourses\Files\" +
