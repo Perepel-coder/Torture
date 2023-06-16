@@ -14,6 +14,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Library\Cypher.dll" />
+    <None Remove="Library\Mathematics.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Library\Cypher.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Library\Mathematics.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DocX" Version="2.4.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
     <PackageReference Include="ReactiveUI" Version="18.4.25" />
@@ -26,11 +40,11 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Reference Include="Mathematics">
-		  <HintPath>..\..\..\libraries\Cypher\bin\Release\net6.0\Mathematics.dll</HintPath>
-	  </Reference>
     <Reference Include="Cypher">
-      <HintPath>..\..\..\libraries\Cypher\bin\Release\net6.0\Cypher.dll</HintPath>
+      <HintPath>Library\Cypher.dll</HintPath>
+    </Reference>
+    <Reference Include="Mathematics">
+      <HintPath>Library\Mathematics.dll</HintPath>
     </Reference>
   </ItemGroup>
 
