@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:View.Tutor.Controls"
         mc:Ignorable="d" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen"
-        Height="550" Width="700" x:Name="LookDetails">
+        Height="550" Width="700" x:Name="LookDetails" Icon="/Tutor/pillory.ico">
     
     <Grid  Background="Black">
         

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View.Tutor.Resourses"
         mc:Ignorable="d"
-        Title="CreatTopicWindow" Height="200" Width="300">
+        Title="CreatTopicWindow" Height="200" Width="300" Icon="/Tutor/pillory.ico">
     <Grid Background="Black">
         <!--#region  Background image-->
         <Grid>

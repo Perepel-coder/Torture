@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d" Height="550" Width="700" 
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Icon="/Tutor/pillory.ico">
     <Grid Background="Black">
         <!--#region  Background image-->
         <Grid>

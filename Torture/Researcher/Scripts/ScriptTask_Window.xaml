@@ -8,7 +8,7 @@
         Name="TaskWindow"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="650" Width="1000">
+        Height="650" Width="1000" Icon="/Researcher/Scripts/pillory.ico">
     <Grid Background="Gray">
         <controls:CombinationLock_Control Background="White"
             x:Name="CombinationLock_Control"

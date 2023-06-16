@@ -9,6 +9,7 @@
 	
   <ItemGroup>
     <None Remove="Cryptoalgorithm.db" />
+    <None Remove="pillory.ico" />
     <None Remove="Researcher\Resourses\Close.png" />
     <None Remove="Researcher\Resourses\Coin.jpg" />
     <None Remove="Researcher\Resourses\Crypto.png" />
@@ -16,6 +17,7 @@
     <None Remove="Researcher\Resourses\Run.png" />
     <None Remove="Researcher\Resourses\Task.png" />
     <None Remove="Researcher\Resourses\tgBtn_default.png" />
+    <None Remove="Researcher\Scripts\pillory.ico" />
     <None Remove="Researcher\Scripts\Resourses\AESScript_Part1.pdf" />
     <None Remove="Researcher\Scripts\Resourses\Sum&amp;MultGF%282n%29.pdf" />
     <None Remove="Researcher\Scripts\Resourses\TrainInfo.html" />
@@ -35,6 +37,7 @@
     <None Remove="Researcher\Tasks\Resourses\SumOfPolyGF.html" />
     <None Remove="Researcher\Tasks\Resourses\Treasure.gif" />
     <None Remove="TrainingModule.db" />
+    <None Remove="Tutor\pillory.ico" />
     <None Remove="Tutor\Resourses\Alg.png" />
     <None Remove="Tutor\Resourses\setting.png" />
     <None Remove="Tutor\Resourses\Train.png" />
@@ -85,6 +88,8 @@
     <EmbeddedResource Include="User.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Resource Include="pillory.ico" />
+    <Resource Include="Researcher\Scripts\pillory.ico" />
     <Resource Include="Researcher\Tasks\Resourses\Rocket.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -155,6 +160,7 @@
     <Resource Include="Researcher\Tasks\Resourses\Treasure.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Tutor\pillory.ico" />
     <Resource Include="Tutor\Resourses\Alg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

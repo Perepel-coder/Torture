@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Height="600" Width="800">
+        Height="600" Width="800" Icon="/Tutor/pillory.ico">
     <Grid Background="Black">
         <!--#region  Background image-->
         <Grid>

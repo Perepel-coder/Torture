@@ -6,7 +6,7 @@
         xmlns:controls="clr-namespace:View.Tutor.Controls"
         mc:Ignorable="d" Height="550" Width="600" 
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize" x:Name="CreatTask">
+        ResizeMode="NoResize" x:Name="CreatTask" Icon="/Tutor/pillory.ico">
     <Grid Background="Black">
         
         <!--#region  Background image-->

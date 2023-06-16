@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Height="260" Width="400" 
         WindowStartupLocation="CenterScreen" 
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Icon="/pillory.ico">
     <!--#region Resources-->
     <Window.Resources>
         <Style TargetType="TextBlock">

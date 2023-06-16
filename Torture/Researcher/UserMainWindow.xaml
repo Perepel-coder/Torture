@@ -9,7 +9,7 @@
         Width="1000"
         Name="UserMW"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Icon="/Researcher/Scripts/pillory.ico">
 
     <Grid Background="Black">
 

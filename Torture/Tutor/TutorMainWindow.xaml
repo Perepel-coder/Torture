@@ -9,7 +9,7 @@
         Width="1000"
         Name="TutorMW"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Icon="/Tutor/pillory.ico">
     <Grid Background="Black">
         
         <!--#region  Background image-->
