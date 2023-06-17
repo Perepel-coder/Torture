@@ -1,4 +1,5 @@
-﻿using Services.Models;
+﻿using Models;
+using Services.Models;
 using System.Collections.Generic;
 
 namespace Services.RequestDB.InterfaceDB
@@ -25,8 +26,9 @@ namespace Services.RequestDB.InterfaceDB
         IEnumerable<AScript> GetScripts();
         Script_S GetScript(int id, bool clearAnswer);
 
-        bool UpdateQuestion(Question_S question);
-        bool SaveQuestion(Question_S question);
+        Question_S? UpdateQuestion(Question_S question);
+        Question_S? SaveQuestion(Question_S question);
+        bool DeleteQuestion(Question_S question);
         bool SaveTopic(string topic);
     }
 }

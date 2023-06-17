@@ -154,10 +154,27 @@ namespace Services.Models
     }
     #endregion
 
-    public class Topic_S
+    public class Topic_S : ReactiveObject
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
+        private int id;
+        private string name = null!;
+
+        public int Id 
+        { 
+            get => id;
+            set 
+            { 
+                this.RaiseAndSetIfChanged(ref id, value); 
+            } 
+        }
+        public string Name
+        { 
+            get => name;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref name, value);
+            }
+        }
     }
 
     public class Answer_S : ReactiveObject

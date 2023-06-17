@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using View.Tutor.Controls;
 
 namespace View.Tutor
 {
@@ -51,7 +52,11 @@ namespace View.Tutor
         {
             CreatScript_Control.Visibility = Visibility.Collapsed;
             UserDB_Control.Visibility = Visibility.Collapsed;
+            Settings_Control.CloseBTN.Visibility = Visibility.Collapsed;
+            Settings_Control.CreatQuestion_Control.Visibility = Visibility.Collapsed;
+            Settings_Control.CuratorRegistration_Controls.Visibility = Visibility.Collapsed;
             Settings_Control.Visibility = Visibility.Visible;
+            Settings_Control.Settings_Panel.Visibility = Visibility.Visible;
         }
     }
 }

@@ -46,15 +46,6 @@ namespace Torture
             }
             throw new Exception("Авторизация не возможна");
         }
-        public static bool Registration<T>(string login, T password)
-        {
-            var model = Current.MainWindow.DataContext as IAuthorization<T>;
-            if (model != null)
-            {
-                return model.Registration(login, password);
-            }
-            throw new Exception("Авторизация не возможна");
-        }
 
         private void WindowsClose()
         {

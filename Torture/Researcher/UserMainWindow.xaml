@@ -94,6 +94,25 @@
                            BorderBrush="Transparent"
                            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
+                    <ListViewItem HorizontalAlignment="Left"
+                                  Style="{StaticResource ListView_NV_Style}">
+
+                        <StackPanel Orientation="Horizontal" Width="300">
+
+                            <Button x:Name="UserBTN" Width="35" Height="35" 
+                                    Command="{Binding UserProfile}"
+                                    Style="{StaticResource Close_btn}"
+                                    ToolTip="Профиль">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="./Resourses/user.png" />
+                                </Button.Background>
+                            </Button>
+
+                            <TextBlock Margin="10" Text="Прлфиль" Style="{StaticResource font_style}"/>
+
+                        </StackPanel>
+                    </ListViewItem>
+
                     <ListViewItem HorizontalAlignment="Left" 
                                   Style="{StaticResource ListView_NV_Style}">
 
@@ -173,6 +192,7 @@
 
                         </StackPanel>
                     </ListViewItem>
+
                 </ListView>
                 
             </StackPanel>
@@ -187,6 +207,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="1">
+
                 <controls:Script_MainMenu_Control x:Name="Script_MainMenu_Control"
                                                   Visibility="Visible"
                                                   DataContext="{Binding Controls.CurrentVM_UserVM}"/>

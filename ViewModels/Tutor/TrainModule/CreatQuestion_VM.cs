@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using DynamicData;
 using Services.Models;
 using Services.RequestDB.InterfaceDB;
 using System;
@@ -30,6 +31,7 @@ namespace ViewModels.Tutor.TrainModule
         private RelayCommand? addAnswer;
         private RelayCommand? deleteAnswer;
         private RelayCommand? creatQuestion;
+        private RelayCommand? updateQuestion;
         private RelayCommand? detailsQuestion;
         private RelayCommand? deleteQuestion;
         public ICommand AddAnswer
@@ -79,7 +81,8 @@ namespace ViewModels.Tutor.TrainModule
                         Answers = new(Controls.Answers)
                     };
 
-                    if (!TMS.SaveQuestion(question))
+                    question = TMS.SaveQuestion(question);
+                    if (question == null)
                     {
                         ErrorMessage(
                             "Добавление вопроса с текущими параметрами не возможно!\n" +
@@ -89,11 +92,45 @@ namespace ViewModels.Tutor.TrainModule
                     else
                     {
                         InfoMessage("Вопрос добавлен", "Удачное добавление вопроса");
+                        Controls.Questions.Add(question);
                     }
                 });
             }
         }
+        public ICommand UpdateQuestion
+        {
+            get
+            {
+                return updateQuestion ??= new RelayCommand(obj =>
+                {
+                    if(Controls.SelectQuestion == null) 
+                    { 
+                        return; 
+                    }
+                    var question = new Question_S
+                    {
+                        Id = Controls.SelectQuestion.Id,
+                        Text = Controls.TextQuestion,
+                        Topic = Controls.SelectTopic.Name,
+                        Answers = new(Controls.Answers)
+                    };
 
+                    question = TMS.UpdateQuestion(question);
+                    if (question == null)
+                    {
+                        ErrorMessage(
+                            "Обновление вопроса с текущими параметрами не возможно!\n" +
+                            "Попробуйте изменить формулировку вопроса или ответов",
+                            "Ошибка при обновлении вопроса");
+                    }
+                    else
+                    {
+                        InfoMessage("Вопрос обновлен", "Удачное обновление вопроса");
+                        Controls.Questions.Replace(Controls.SelectQuestion, question);
+                    }
+                });
+            }
+        }
         public ICommand DetailsQuestion
         {
             get
@@ -105,13 +142,6 @@ namespace ViewModels.Tutor.TrainModule
                         Controls.SelectTopic = TMS.GetTopic(Controls.SelectQuestion.Topic);
                         Controls.TextQuestion = Controls.SelectQuestion.Text;
                         Controls.Answers = new(Controls.SelectQuestion.Answers);
-
-                        //AppWindows.ShowDialog(AppWindows.SetDataContext(
-                        //    "LookAnswers",
-                        //    Builder.Resolve<LookAnswers_VM>(
-                        //        new NamedParameter("Question",
-                        //        Controls.SelectQuestion))
-                        //    ));
                     }
                 });
             }
@@ -124,6 +154,7 @@ namespace ViewModels.Tutor.TrainModule
                 {
                     if (Controls.SelectQuestion != null)
                     {
+                        TMS.DeleteQuestion(Controls.SelectQuestion);
                         Controls.Questions.Remove(Controls.SelectQuestion);
                     }
                 });

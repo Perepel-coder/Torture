@@ -4,6 +4,8 @@ using Services.Models;
 using System.Collections.Generic;
 using Models;
 using System.Linq;
+using System;
+using System.Net.WebSockets;
 
 namespace Services
 {
@@ -234,26 +236,34 @@ namespace Services
             });
         }
 
-
-
-
-        public bool SaveTutor(string login, string password)
+        public bool RegUser(string login, string password, USER_ROLE role)
         {
-            try
+
+            bool Registration<T>(IRepository<T> repo) where T : User, new() 
             {
-                int count = tutorRepo.GetAll().Where(t => t.Login == login).Count();
-                if(count != 0)
+                int count = userRepo.GetAll().Where(t => t.Login == login).Count();
+                if (count != 0)
                 {
                     return false;
                 }
-                tutorRepo.Insert(new Tutor
+                repo.Insert(new T
                 {
                     Login = login,
                     Password = password,
-                    Discriminator = typeof(Tutor).Name
+                    Discriminator = typeof(T).Name
                 });
-                tutorRepo.Save();
+                repo.Save();
                 return true;
+            }
+
+            try
+            {
+                switch (role)
+                {
+                    case USER_ROLE.Tutor: return Registration(tutorRepo);
+                    case USER_ROLE.Researcher: return Registration(researcherRepo);
+                    default: throw new Exception("Тип пользователя не определен");
+                }           
             }
             catch
             {
@@ -299,6 +309,7 @@ namespace Services
 
             try
             {
+                testRepo.Save();
                 researcherRepo.Save();
                 return true;
             }
@@ -317,6 +328,7 @@ namespace Services
                     TutorId = group.TutorId
                 };
                 groupRepo.Insert(mygroup);
+                groupRepo.Save();
                 foreach (var r in group.Researchers)
                 {
                     if (r.ID == 0)
@@ -389,6 +401,7 @@ namespace Services
                         res.GroupId = groupR.ID;
                     }
                 }
+                researcherRepo.Save();
                 groupRepo.Save();
                 return true;
             }
@@ -401,7 +414,10 @@ namespace Services
         {
             try
             {
-                groupRepo.Delete(groupRepo.Get(group.Id));
+                var groupR = (groupRepo.Include("Researchers"))
+                    .Where(g=>g.ID == group.Id)
+                    .SingleOrDefault();
+                groupRepo.Delete(groupR);
                 groupRepo.Save();
                 return true;
             }

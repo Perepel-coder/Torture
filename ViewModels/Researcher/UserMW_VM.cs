@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using Services.Models;
 using System.Windows.Input;
 using ViewModels.Interfaces;
 using ViewModels.Models;
+using ViewModels.Tutor.UserDB;
 
 namespace ViewModels.Researcher
 {
@@ -17,11 +19,26 @@ namespace ViewModels.Researcher
             GetScripts.Execute(null);
         }
 
+        private RelayCommand? userProfile;
         private RelayCommand? getScripts;
         private RelayCommand? getComparison;
         private RelayCommand? getCrypto;
         private RelayCommand? getTasks;
 
+        public ICommand UserProfile
+        {
+            get
+            {
+                return userProfile ??= new RelayCommand(obj =>
+                {
+                    AppWindows.ShowDialog(AppWindows.SetDataContext(
+                            "UserInfo",
+                            Builder.Resolve<UserInfo_VM>(
+                                new NamedParameter("Researcher", (Researcher_S)User))
+                            ));
+                });
+            }
+        }
         public ICommand GetScripts
         {
             get

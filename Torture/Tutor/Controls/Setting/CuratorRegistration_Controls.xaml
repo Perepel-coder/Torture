@@ -3,22 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Width="400" Height="250">
+             mc:Ignorable="d" Width="400" Height="270">
     <!--#region Resources-->
     <UserControl.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="MinHeight" Value="25"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="HorizontalAlignment"  Value="Left"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Margin" Value="5,0"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="MinWidth" Value="30"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="FontSize" Value="16"/>
         </Style>
         <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
+        </Style>
+        <Style TargetType="ComboBox">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="MinHeight" Value="30"/>
             <Setter Property="FontSize" Value="14"/>
@@ -33,7 +40,7 @@
     </UserControl.Resources>
     <!--#endregion-->
     <StackPanel Background="#80808080">
-        <TextBlock Text="Регистрация администратора" HorizontalAlignment="Center" FontSize="20"/>
+        <TextBlock Text="Регистрация пользователя" HorizontalAlignment="Center" FontSize="20"/>
         <TextBlock Text="Логин"/>
         <TextBox x:Name="Login" Text="{Binding Controls.Login}"/>
         <TextBlock Text="Пароль"/>
@@ -41,6 +48,11 @@
             <TextBox Width="350" Text="{Binding Controls.Password}"/>
             <Button Content="⚙️" Command="{Binding Generator}"/>
         </StackPanel>
+        <TextBlock Text="Роль"/>
+        <ComboBox SelectedIndex="{Binding Controls.Role}">
+            <ComboBoxItem Content="Исследователь"/>
+            <ComboBoxItem Content="Инструктор"/>
+        </ComboBox>
         <Button x:Name="AuthorizationBTN" Content="Регистрация"
                 Command="{Binding Registration}"/>
     </StackPanel>

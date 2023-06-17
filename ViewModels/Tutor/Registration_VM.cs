@@ -7,7 +7,6 @@ using ViewModels.Models.Tutor;
 using ViewModels.Tutor.TrainModule;
 using Autofac;
 using System;
-using Services.Crypto;
 
 namespace ViewModels.Tutor
 {
@@ -21,6 +20,7 @@ namespace ViewModels.Tutor
         {
             Controls = controls;
             Controls.Login = "Tutor";
+            Controls.Role = 0;
             Generator.Execute(null);
             US = userService;
         }
@@ -46,9 +46,9 @@ namespace ViewModels.Tutor
                    if(Controls.Login.Replace(" ", "") != string.Empty &&
                     Controls.Login != string.Empty)
                     {
-                        if(US.SaveTutor(Controls.Login, Controls.Password))
+                        if(US.RegUser(Controls.Login, Controls.Password, (USER_ROLE)Controls.Role))
                         {
-                            InfoMessage("Куратор доавлен!");
+                            InfoMessage("Пользователь зарегистрирован!");
                         }
                         else
                         {

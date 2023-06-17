@@ -17,6 +17,7 @@
     <None Remove="Researcher\Resourses\Run.png" />
     <None Remove="Researcher\Resourses\Task.png" />
     <None Remove="Researcher\Resourses\tgBtn_default.png" />
+    <None Remove="Researcher\Resourses\user.png" />
     <None Remove="Researcher\Scripts\pillory.ico" />
     <None Remove="Researcher\Scripts\Resourses\AESScript_Part1.pdf" />
     <None Remove="Researcher\Scripts\Resourses\Sum&amp;MultGF%282n%29.pdf" />
@@ -39,6 +40,7 @@
     <None Remove="TrainingModule.db" />
     <None Remove="Tutor\pillory.ico" />
     <None Remove="Tutor\Resourses\Alg.png" />
+    <None Remove="Tutor\Resourses\Exit.png" />
     <None Remove="Tutor\Resourses\setting.png" />
     <None Remove="Tutor\Resourses\Train.png" />
     <None Remove="Tutor\Resourses\User.png" />
@@ -47,7 +49,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Cryptoalgorithm.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Researcher\Scripts\Resourses\AESScript_Part1.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -83,12 +85,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="TrainingModule.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="User.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="pillory.ico" />
+    <Resource Include="Researcher\Resourses\user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Researcher\Scripts\pillory.ico" />
     <Resource Include="Researcher\Tasks\Resourses\Rocket.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -162,6 +167,9 @@
     </Resource>
     <Resource Include="Tutor\pillory.ico" />
     <Resource Include="Tutor\Resourses\Alg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Tutor\Resourses\Exit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Tutor\Resourses\setting.png">

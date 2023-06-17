@@ -305,10 +305,16 @@ namespace Services.RequestDB
 
 
 
-        public bool UpdateQuestion(Question_S question)
+        public Question_S? UpdateQuestion(Question_S question)
         {
             try
             {
+                if (questionRepo.GetAll()
+                   .Where(q => q.Text == question.Text && q.ID != question.Id)
+                   .Count() != 0)
+                {
+                    return null;
+                }
                 var quest = questionRepo
                         .Include("Answers")
                         .Single(q => q.ID == question.Id);
@@ -336,15 +342,16 @@ namespace Services.RequestDB
                         });
                     }
                 }
+                answerRepo.Save();
                 questionRepo.Save();
-                return true;
+                return question;
             }
             catch
             {
-                return false;
+                return null;
             }
         }
-        public bool SaveQuestion(Question_S question)
+        public Question_S? SaveQuestion(Question_S question)
         {
             try
             {
@@ -352,7 +359,7 @@ namespace Services.RequestDB
                     .Where(q => q.Text == question.Text)
                     .Count() != 0)
                 {
-                    return false;
+                    return null;
                 }
                 Question quest = new Question
                 {
@@ -360,12 +367,26 @@ namespace Services.RequestDB
                     TopicId = topicRepo.GetAll().Single(t => t.Name == question.Topic).ID
                 };
                 questionRepo.Insert(quest);
+                questionRepo.Save();
                 question.Id = quest.ID;
-                if (!UpdateQuestion(question))
+                if (UpdateQuestion(question) == null)
                 {
                     questionRepo.Delete(quest);
-                    return false;
+                    return null;
                 }
+                return question;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public bool DeleteQuestion(Question_S question) 
+        {
+            try
+            {
+                questionRepo?.Delete(questionRepo.Get(question.Id));
+                questionRepo?.Save();
                 return true;
             }
             catch

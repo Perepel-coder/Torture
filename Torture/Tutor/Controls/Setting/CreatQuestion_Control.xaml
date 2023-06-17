@@ -80,6 +80,9 @@
                     <Button Margin="0,5" DockPanel.Dock="Bottom"
                             Content="Добавить новый вопрос"
                             Command="{Binding CreatQuestion}"/>
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Обновить текущий вопрос"
+                            Command="{Binding UpdateQuestion}"/>
                     <GroupBox Header="Текущие варианты ответов" DockPanel.Dock="Left"
                               Width="290">
                         <ListView Background="Transparent"

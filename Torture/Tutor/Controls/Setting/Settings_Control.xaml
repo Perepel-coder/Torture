@@ -31,7 +31,7 @@
                         Width="500" x:Name="Settings_Panel"
                         Grid.Row="1" Grid.ColumnSpan="3">
                 <Button Height="40" Margin="5" FontSize="20"
-                        Content="Регистрация нового инструктора"
+                        Content="Регистрация нового пользователя"
                         x:Name="CuratorRegistration_BTN"
                         Click="CuratorRegistration_BTN_Click"
                         Command="{Binding CuratorReg}"/>

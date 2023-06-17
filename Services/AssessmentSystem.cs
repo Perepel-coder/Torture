@@ -36,16 +36,16 @@ namespace Services
         public static void Assessment(ScriptUser_S script)
         {
             double percentGQ =
-                script.Test.Questions.Sum(q => q.Score) / 
+                script.Test.Questions.Sum(q => q.Score)*1.0f / 
                 (script.Test.Questions.Count * 100) * 100;
 
             script.Test.QuestionsScore =
                 (percentGQ < 30) ? 2 :
-                (percentGQ < 60) ? 3 :
+                (percentGQ < 70) ? 3 :
                 (percentGQ < 90) ? 4 : 5;
 
             double percentGT = 
-                script.Test.Tasks.Sum(q => q.Score) / 
+                script.Test.Tasks.Sum(q => q.Score)*1.0f / 
                 script.Test.Tasks.Count * 100;
 
             script.Test.TasksScore =

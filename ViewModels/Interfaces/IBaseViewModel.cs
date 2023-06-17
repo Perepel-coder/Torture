@@ -13,7 +13,7 @@ namespace ViewModels.Interfaces
     {
         public BaseViewModel? CurrentVM { get; set; }
         public bool Authorization(string login, T password);
-        public bool Registration(string login, T password);
+        public bool Registration(string login, T password, USER_ROLE role);
     }
     public abstract class BaseViewModel
     {

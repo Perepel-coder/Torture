@@ -2,6 +2,7 @@
 
 namespace Services.Models
 {
+    public enum USER_ROLE { Researcher, Tutor };
     public class User_S
     {
         public int ID { get; set; }

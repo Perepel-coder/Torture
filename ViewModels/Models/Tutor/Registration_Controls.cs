@@ -10,6 +10,7 @@ namespace ViewModels.Models.Tutor
     {
         private string login = string.Empty;
         private string password = string.Empty;
+        private int role;
         public string Login
         {
             get => login;
@@ -19,6 +20,11 @@ namespace ViewModels.Models.Tutor
         {
             get => password;
             set => this.RaiseAndSetIfChanged(ref password, value);
+        }
+        public int Role
+        {
+            get => role;
+            set => this.RaiseAndSetIfChanged(ref role, value);
         }
         public static string PasswordGenerator(int start)
         {

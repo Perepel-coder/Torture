@@ -37,9 +37,9 @@ namespace ViewModels
             return true;
         }
 
-        public bool Registration(string login, string password)
+        public bool Registration(string login, string password, USER_ROLE role)
         {
-            return userService.SaveTutor(login, password);
+            return userService.RegUser(login, password, role);
         }
     }
 }

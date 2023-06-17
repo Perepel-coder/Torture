@@ -7,6 +7,7 @@ namespace Services.RequestDB.InterfaceDB
     {
         User_S? GetUser(string login, string password);
         Tutor_S? GetTutor(int id);
+        Researcher_S? GetResearcher(int id);
         IEnumerable<Researcher_S> GetFreeResearchers();
         public IEnumerable<Group_S> GetGroups(int tutorID);
         string? GetGroupName(int id);
@@ -16,6 +17,6 @@ namespace Services.RequestDB.InterfaceDB
         bool SaveGroup(Group_S group);
         bool UpdateGroup(Group_S group);
         bool DeleteGroup(Group_S group);
-        bool SaveTutor(string login, string password);
+        bool RegUser(string login, string password, USER_ROLE role);
     }
 }

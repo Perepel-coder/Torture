@@ -17,8 +17,18 @@ namespace ViewModels.Tutor.UserDB
             Researcher_S researcher)
         {
             Controls = controls;
-            Controls.Researcher = researcher;
-            Controls.Group = userService.GetGroupName((int)Controls.Researcher.GroupId);
+            if(User.Discriminator == "Researcher")
+            {
+                Controls.Researcher = userService.GetResearcher(researcher.ID);
+            }
+            else if(User.Discriminator == "Tutor")
+            {
+                Controls.Researcher = researcher;
+            }
+            if(Controls.Researcher?.GroupId != null)
+            {
+                Controls.Group = userService.GetGroupName((int)Controls.Researcher.GroupId);
+            }
         }
         private RelayCommand? getTest;
         public ICommand GetTest
