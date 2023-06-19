@@ -109,11 +109,11 @@ namespace ViewModels.Tutor.TrainModule
                     {
                         InfoMessage("Вопрос добавлен", "Удачное добавление вопроса");
                         Controls.Questions.Add(question);
+                        Controls.Topics = new(TMS.GetTopics());
+                        Controls.SelectTopic = Controls.Topics.Single(q => q.Name == question.Topic);
+                        GetListQuestions();
+                        Controls.Topics_quest = new(Controls.Topics.Select(t => t.Name));
                     }
-                    Controls.Topics = new(TMS.GetTopics());
-                    Controls.SelectTopic = Controls.Topics.Single(q=>q.Name == question.Topic);
-                    GetListQuestions();
-                    Controls.Topics_quest = new(Controls.Topics.Select(t => t.Name));
                 });
             }
         }

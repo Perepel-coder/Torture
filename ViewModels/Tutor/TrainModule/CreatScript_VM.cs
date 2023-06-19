@@ -27,6 +27,7 @@ namespace ViewModels.Tutor.TrainModule
 
             Controls.GetTasks += GetTasks;
             Controls.GetQuestions += GetQuestions;
+
             TransitionUpdate.Execute(null);
         }
         private RelayCommand? download;
@@ -37,8 +38,6 @@ namespace ViewModels.Tutor.TrainModule
         private RelayCommand? deleteTask;
         private RelayCommand? getAnswers;
         private RelayCommand? getDetails;
-        private RelayCommand? creatQuestion;
-        private RelayCommand? creatTask;
         private RelayCommand? transitionUpdate;
         private RelayCommand? transitionSave;
         private RelayCommand? deleteScript;
@@ -197,36 +196,6 @@ namespace ViewModels.Tutor.TrainModule
                 });
             }
         }
-        public ICommand CreatQuestion
-        {
-            get
-            {
-                return creatQuestion ??= new RelayCommand(obj =>
-                {
-                    AppWindows.ShowDialog(AppWindows.SetDataContext(
-                            "CreatQuestion",
-                            Builder.Resolve<CreatQuestion_VM>()
-                            )
-                        );
-                    GetQuestions();
-                });
-            }
-        }
-        public ICommand CreatTask
-        {
-            get
-            {
-                return creatTask ??= new RelayCommand(obj =>
-                {
-                    AppWindows.ShowDialog(AppWindows.SetDataContext(
-                            "CreatTask",
-                            Builder.Resolve<CreatTask_VM>()
-                            )
-                        );
-                    GetQuestions();
-                });
-            }
-        }
 
         public ICommand TransitionUpdate
         {
@@ -373,19 +342,22 @@ namespace ViewModels.Tutor.TrainModule
 
         private void SetScriptTest()
         {
-            Controls.InfoFile = Controls.SelectScript.Information;
-            Controls.SelectTopic = Controls.SelectScript?.Topic;
-            Controls.TestName = Controls.SelectScript?.Test?.Name;
+            if(Controls.SelectScript != null)
+            {
+                Controls.InfoFile = Controls.SelectScript.Information;
+                Controls.SelectTopic = Controls.SelectScript?.Topic;
+                Controls.TestName = Controls.SelectScript?.Test?.Name;
 
-            var questions = Controls.SelectScript?.Test?.Questions;
-            var tasks = Controls.SelectScript?.Test?.Tasks;
-            if (questions != null)
-            {
-                Controls.SelectQuestions = new(questions);
-            }
-            if(tasks != null)
-            {
-                Controls.SelectTasks = new(tasks);
+                var questions = Controls.SelectScript?.Test?.Questions;
+                var tasks = Controls.SelectScript?.Test?.Tasks;
+                if (questions != null)
+                {
+                    Controls.SelectQuestions = new(questions);
+                }
+                if (tasks != null)
+                {
+                    Controls.SelectTasks = new(tasks);
+                }
             }
         }
         private void GetTasks()
