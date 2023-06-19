@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>pillory.ico</ApplicationIcon>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -49,7 +50,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Cryptoalgorithm.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Researcher\Scripts\Resourses\AESScript_Part1.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -88,10 +89,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="TrainingModule.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="User.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="pillory.ico" />
     <Resource Include="Researcher\Resourses\user.png">
