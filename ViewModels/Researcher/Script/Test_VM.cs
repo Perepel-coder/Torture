@@ -14,11 +14,11 @@ namespace ViewModels.Researcher.Script
         public Test_VM(
             Test_Controls controls,
             IUserService userService,
-            AScript script)
+            Script_S script)
         {
             Name = typeof(Test_VM).Name;
             Controls = controls;
-            Controls.Script = script as Script_S;
+            Controls.Script = script;
             US = userService;
         }
         private RelayCommand? complete;

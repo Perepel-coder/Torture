@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace View.Tutor
 {
     /// <summary>
-    /// Логика взаимодействия для CreatQuestionWindow.xaml
+    /// Логика взаимодействия для ChangeNameWindow.xaml
     /// </summary>
-    public partial class CreatQuestionWindow : Window
+    public partial class ChangeNameWindow : Window
     {
-        public CreatQuestionWindow()
+        public ChangeNameWindow()
         {
             InitializeComponent();
         }

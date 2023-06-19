@@ -10,24 +10,34 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="56*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Все тестовые вопросы" Grid.Column="0">
-            <ListView Background="Transparent"
+        <DockPanel  Grid.Column="0">
+            <ComboBox DockPanel.Dock="Top" Margin="3"
+                      ItemsSource="{Binding Controls.Topics}"
+                      SelectedItem="{Binding Controls.SelectTopic}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <GroupBox Header="Все тестовые вопросы">
+                <ListView Background="Transparent"
                       BorderBrush="Transparent" 
                       ScrollViewer.CanContentScroll="False"
                       ItemContainerStyle="{StaticResource ListView_NV_Style_Transparent}"
                       ItemsSource="{Binding Controls.Questions}"
                       SelectedItem="{Binding Controls.SelectQuestion}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="0,5">
-                            <TextBlock
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                <TextBlock
                                 Text="{Binding Text}" 
                                 TextWrapping="Wrap"
                                 Width="230"
                                 FontSize="12"
                                 Style="{StaticResource font_style}"/>
-                            <TextBlock Text="{Binding Flag}" Margin="5,0"/>
-                            <TextBlock Text="Детали" Margin="5,0">
+                                <TextBlock Text="{Binding Flag}" Margin="5,0"/>
+                                <TextBlock Text="Детали" Margin="5,0">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseLeftButtonUp">
                                         <i:InvokeCommandAction 
@@ -37,8 +47,8 @@
                                         </i:InvokeCommandAction>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                            </TextBlock>
-                            <TextBlock Text="Удалить">
+                                </TextBlock>
+                                <TextBlock Text="Удалить">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseLeftButtonUp">
                                         <i:InvokeCommandAction 
@@ -48,25 +58,26 @@
                                         </i:InvokeCommandAction>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                            </TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </GroupBox>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </GroupBox>
+        </DockPanel>
+
 
         <DockPanel Grid.Column="1">
             <GroupBox Header="Вопрос - основные параметры" DockPanel.Dock="Top">
                 <StackPanel>
-                    <TextBlock Text="Выбрать тему" Style="{StaticResource font_style}"/>
-                    <ComboBox ItemsSource="{Binding Controls.Topics}"
-                              SelectedItem="{Binding Controls.SelectTopic}">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=Name}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <TextBlock Text="Тема вопроса" Style="{StaticResource font_style}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox ItemsSource="{Binding Controls.Topics_quest}"
+                                  SelectedItem="{Binding Controls.Topic}"
+                                  Width="470" Margin="0,0,3,0"/>
+                        <Button Width="40" Content="⚙️"
+                                Command="{Binding CreatTopic}"/>
+                    </StackPanel>
                     <StackPanel Margin="0, 5">
                         <TextBlock Text="Формулировка вопроса" 
                                    Style="{StaticResource font_style}"/>
@@ -122,7 +133,10 @@
                             <TextBlock Text="Формулировка"
                                            Style="{StaticResource font_style}"/>
                             <TextBox Text="{Binding Controls.TextAnswer, Mode=TwoWay}"
-                                         AcceptsReturn="True" AcceptsTab="True" Height="100"/>
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True" 
+                                     AcceptsTab="True" 
+                                     Height="100"/>
                             <StackPanel Margin="0,5">
                                 <TextBlock Text="Качество"
                                        Style="{StaticResource font_style}"/>

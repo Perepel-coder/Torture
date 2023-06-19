@@ -155,6 +155,15 @@ namespace Services.Crypto
             var document = TransformData.ToXML(Pairs, rootName);
             document.Save(stream);
         }
+
+        public static void CopyFile(string path, string newPath)
+        {
+            File.Copy(path, newPath, true);
+        }
+        public static void DeleteFile(string path) 
+        { 
+            File.Delete(path);
+        }
         #endregion
     }
 }

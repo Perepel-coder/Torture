@@ -31,13 +31,7 @@ namespace ViewModels.Tutor.TrainModule
                 {
                     if(Controls.Topic.Replace(" ", "") != string.Empty)
                     {
-                        if (TMS.SaveTopic(Controls.Topic))
-                        {
-                            InfoMessage("Тема добавлена");
-                            return;
-                        }
-                        ErrorMessage("Ошибка при добавлении темы");
-                        return;
+                        TMS.SaveTopic(Controls.Topic);
                     }
                 });
             }

@@ -73,10 +73,10 @@ namespace Torture
             AppWindows.Add("UserInfo", typeof(UserInfoWindow));
             AppWindows.Add("AddGroup", typeof(AddGroupWindow));
             AppWindows.Add("LookAnswers", typeof(LookAnswersWindow));
-            AppWindows.Add("CreatQuestion", typeof(CreatQuestionWindow));
             AppWindows.Add("LookDetails", typeof(LookDetailsWindow));
-            AppWindows.Add("CreatTask", typeof(CreatTaskWindow));
             AppWindows.Add("CreatTopic", typeof(CreatTopicWindow));
+            AppWindows.Add("ChangeName", typeof(ChangeNameWindow));
+            AppWindows.Add("AddTopic", typeof(AddTopicWindow));
 
             var autho = builder.Resolve<Authorization>();
             var autho_vm = builder.Resolve<Authorization_VM>();

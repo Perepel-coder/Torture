@@ -16,10 +16,10 @@ namespace ViewModels.Researcher.Script
         public TrainInform_Controls Controls { get; set; }
         public TrainInform_VM(
             TrainInform_Controls controls,
-            AScript script)
+            Script_S script)
         {
             Controls = controls;
-            Controls.Script = script as Script_S;
+            Controls.Script = script;
             if (Controls.Script != null)
             {
                 Controls.Info =

@@ -2,11 +2,7 @@
 using DynamicData;
 using Services.Models;
 using Services.RequestDB.InterfaceDB;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ViewModels.Interfaces;
 using ViewModels.Models.Tutor.TrainModule;
@@ -20,20 +16,40 @@ namespace ViewModels.Tutor.TrainModule
         public CreatQuestion_VM(
             CreatQuestion_Controls controls,
             ITrainModuleService trainModuleService)
-        {
+        { 
             Controls = controls;
+            Controls.GetListQuestions += GetListQuestions;
             TMS = trainModuleService;
             Controls.Topics = new(TMS.GetTopics());
+            Controls.Topics_quest = new(Controls.Topics.Select(t=>t.Name));
             Controls.SelectTopic = Controls.Topics.First();
+            Controls.Topic = Controls.Topics_quest.First();
             Controls.Mode = "Неправильный";
-            Controls.Questions = new(TMS.GetQuestions());
         }
+
+        private RelayCommand? creatTopic;
         private RelayCommand? addAnswer;
         private RelayCommand? deleteAnswer;
         private RelayCommand? creatQuestion;
         private RelayCommand? updateQuestion;
         private RelayCommand? detailsQuestion;
         private RelayCommand? deleteQuestion;
+
+        public ICommand CreatTopic
+        {
+            get
+            {
+                return creatTopic ??= new RelayCommand(obj =>
+                {
+                    AppWindows.ShowDialog(AppWindows.SetDataContext("AddTopic", 
+                        Builder.Resolve<CreatTopic_VM>()));
+                    Controls.Topics = new(TMS.GetTopics());
+                    Controls.Topics_quest = new(Controls.Topics.Select(t => t.Name));
+                    Controls.SelectTopic = Controls.Topics.First();
+                    Controls.Topic = Controls.Topics_quest.First();
+                });
+            }
+        }
         public ICommand AddAnswer
         {
             get
@@ -77,7 +93,7 @@ namespace ViewModels.Tutor.TrainModule
                     var question = new Question_S
                     {
                         Text = Controls.TextQuestion,
-                        Topic = Controls.SelectTopic.Name,
+                        Topic = Controls.Topic,
                         Answers = new(Controls.Answers)
                     };
 
@@ -94,6 +110,9 @@ namespace ViewModels.Tutor.TrainModule
                         InfoMessage("Вопрос добавлен", "Удачное добавление вопроса");
                         Controls.Questions.Add(question);
                     }
+                    Controls.Topics = new(TMS.GetTopics());
+                    GetListQuestions();
+                    Controls.Topics_quest = new(Controls.Topics.Select(t => t.Name));
                 });
             }
         }
@@ -111,7 +130,7 @@ namespace ViewModels.Tutor.TrainModule
                     {
                         Id = Controls.SelectQuestion.Id,
                         Text = Controls.TextQuestion,
-                        Topic = Controls.SelectTopic.Name,
+                        Topic = Controls.Topic,
                         Answers = new(Controls.Answers)
                     };
 
@@ -127,7 +146,11 @@ namespace ViewModels.Tutor.TrainModule
                     {
                         InfoMessage("Вопрос обновлен", "Удачное обновление вопроса");
                         Controls.Questions.Replace(Controls.SelectQuestion, question);
+                        Controls.SelectQuestion = question;
                     }
+                    Controls.Topics = new(TMS.GetTopics());
+                    GetListQuestions();
+                    Controls.Topics_quest = new(Controls.Topics.Select(t => t.Name));
                 });
             }
         }
@@ -139,7 +162,7 @@ namespace ViewModels.Tutor.TrainModule
                 {
                     if (Controls.SelectQuestion != null)
                     {
-                        Controls.SelectTopic = TMS.GetTopic(Controls.SelectQuestion.Topic);
+                        Controls.Topic = Controls.SelectQuestion.Topic;
                         Controls.TextQuestion = Controls.SelectQuestion.Text;
                         Controls.Answers = new(Controls.SelectQuestion.Answers);
                     }
@@ -159,6 +182,12 @@ namespace ViewModels.Tutor.TrainModule
                     }
                 });
             }
+        }
+
+        private void GetListQuestions()
+        {
+            Controls.Questions = new(TMS.GetQuestions()
+                .Where(q => q.Topic == Controls.SelectTopic.Name));
         }
     }
 }

@@ -267,18 +267,22 @@ namespace Services.RequestDB
                 Questions = GetQuestions(t.Questions, clearAnswer).ToList(),
             });
         }
-        public Test_S GetTest(int Id, bool clearAnswer)
+        public Test_S GetTest(int? Id, bool clearAnswer)
         {
-            var test = testRepo.Get(Id);
-            return new Test_S
+            if(Id != null)
             {
-                Id = test.ID,
-                Name = test.Name,
-                Questions = GetQuestions(test.Questions, clearAnswer).ToList(),
-                Tasks = GetTasks(test.Tasks).ToList()
-            };
+                var test = testRepo.Get((int)Id);
+                return new Test_S
+                {
+                    Id = test.ID,
+                    Name = test.Name,
+                    Questions = test.Questions != null ? GetQuestions(test.Questions, clearAnswer).ToList() : new(),
+                    Tasks = test.Tasks != null ? GetTasks(test.Tasks).ToList() : new()
+                };
+            }
+            return new();
         }
-        public IEnumerable<AScript> GetScripts()
+        public IEnumerable<Script_S> GetScripts()
         {
 
             return scriptRepo.GetAll().Select(s =>
@@ -287,7 +291,8 @@ namespace Services.RequestDB
                 Id = s.ID,
                 Name = s.Name,
                 Information = s.Information,
-                Topic = topicRepo.Get(s.ID).Name
+                Topic = topicRepo.Get(s.TopicId).Name,
+                Test = GetTest(s.Test?.ID, false)
             });
         }
         public Script_S GetScript(int id, bool clearAnswer)
@@ -319,7 +324,7 @@ namespace Services.RequestDB
                         .Include("Answers")
                         .Single(q => q.ID == question.Id);
                 quest.Text = question.Text;
-                quest.TopicId = topicRepo.GetAll().Single(t => t.Name == question.Topic).ID;
+                quest.TopicId = SaveTopic(question.Topic).Id;
 
                 for (int i = 0; i < quest.Answers.Count; i++)
                 {
@@ -361,11 +366,13 @@ namespace Services.RequestDB
                 {
                     return null;
                 }
+
                 Question quest = new Question
                 {
                     Text = question.Text,
-                    TopicId = topicRepo.GetAll().Single(t => t.Name == question.Topic).ID
+                    TopicId = SaveTopic(question.Topic).Id
                 };
+
                 questionRepo.Insert(quest);
                 questionRepo.Save();
                 question.Id = quest.ID;
@@ -394,21 +401,141 @@ namespace Services.RequestDB
                 return false;
             }
         }
-        public bool SaveTopic(string topic)
+        public Topic_S SaveTopic(string topic)
         {
-            var count = topicRepo.GetAll().Where(t =>
+            var topic_new = topicRepo.GetAll().Where(t =>
             t.Name.Replace(" ", "").ToLower() ==
-            topic.Replace(" ", "").ToLower()).Count();
-            if (count != 0)
+            topic.Replace(" ", "").ToLower()).SingleOrDefault();
+            if (topic_new != null)
+            {
+                return new Topic_S
+                {
+                    Id = topic_new.ID,
+                    Name = topic_new.Name
+                };
+            }
+            topic_new = new Topic
+            {
+                Name = topic
+            };
+            topicRepo.Insert(topic_new);
+            topicRepo.Save();
+            return new Topic_S
+            {
+                Id = topic_new.ID,
+                Name = topic_new.Name
+            };
+        }
+
+        public bool UpdateScript(Script_S script)
+        {
+            try
+            {
+                testRepo.Include("Questions");
+                var test = testRepo.Include("Tasks").Single(t => t.ID == script.Test.Id);
+                if (scriptRepo
+                .GetAll()
+                .Where(s => s.Name == script.Name && s.ID != script.Id)
+                .Count() != 0)
+                {
+                    return false;
+                }
+                var questions = script.Test.Questions.Select(q => q.Id);
+                var tasks = script.Test.Tasks.Select(t => t.Id);
+
+                var Script = scriptRepo.Get(script.Id);
+                Script.Name = script.Name;
+                Script.Information = script.Information;
+                Script.TopicId = SaveTopic(script.Topic).Id;
+
+                test.Questions.RemoveRange(0, test.Questions.Count);
+                test.Tasks.RemoveRange(0, test.Tasks.Count);
+                testRepo.Save();
+
+                test.Name = script.Test.Name;
+                test.Questions = questionRepo
+                    .GetAll()
+                    .Where(q => questions.Contains(q.ID))
+                    .Select(q => q)
+                    .ToList();
+                test.Tasks = taskRepo
+                    .GetAll()
+                    .Where(t => tasks.Contains(t.ID))
+                    .Select(t => t)
+                    .ToList();
+                Script.Test = test;
+
+                scriptRepo.Save();
+                return true;
+            }
+            catch
             {
                 return false;
             }
-            topicRepo.Insert(new Topic
+        }
+
+        public bool SaveScript(Script_S script_in)
+        {
+            try
             {
-                Name = topic
-            });
-            topicRepo.Save();
-            return true;
+                if (scriptRepo.GetAll().Where(s => s.Name == script_in.Name).Count() != 0)
+                {
+                    return false;
+                }
+
+                var questions = script_in.Test.Questions.Select(q => q.Id);
+                var tasks = script_in.Test.Tasks.Select(t => t.Id);
+
+                Script script = new()
+                {
+                    Name = script_in.Name,
+                    Information = script_in.Information,
+                    TopicId = SaveTopic(script_in.Topic).Id
+                };
+
+                scriptRepo.Insert(script);
+                scriptRepo.Save();
+
+                Test test = new()
+                {
+                    Name = script_in.Test.Name,
+                    ScriptId = script.ID,
+                    Questions = questionRepo
+                        .Include("Answers")
+                        .Where(q => questions.Contains(q.ID))
+                        .Select(q => q)
+                        .ToList(),
+                    Tasks = taskRepo
+                        .GetAll()
+                        .Where(t => tasks.Contains(t.ID))
+                        .Select(t => t)
+                        .ToList()
+                };
+                script.Test = test;
+                scriptRepo.Save();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteScripts(IEnumerable<Script_S> scripts)
+        {
+            try
+            {
+                foreach (var script in scripts)
+                {
+                    scriptRepo.Delete(scriptRepo.Get(script.Id));
+                }
+                scriptRepo.Save();
+                return true;
+            }
+            catch 
+            { 
+                return false; 
+            }
         }
     }
 }

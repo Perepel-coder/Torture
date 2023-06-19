@@ -195,15 +195,19 @@ namespace Services.Models
         public string Topic { get; set; } = null!;
         public List<Answer_S> Answers { get; set; } = null!;
     }
-    public class Test_S
+    public class Test_S : ReactiveObject
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public List<Question_S> Questions { get; set; } = null!;
-        public List<ATask> Tasks { get; set; } = null!;
+        public List<Question_S> Questions { get; set; } = new();
+        public List<ATask> Tasks { get; set; } = new();
     }
-    public class Script_S : AScript
+    public class Script_S
     {
-        public Test_S Test { get; set; } = null!;
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string Information { get; set; } = null!;
+        public string? Topic { get; set; }
+        public Test_S? Test { get; set; }
     }
 }

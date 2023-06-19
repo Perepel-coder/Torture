@@ -20,7 +20,7 @@ namespace ViewModels.Researcher.Script
             TaskScript_Panel_Controls controls,
             ITrainModuleService trainModuleService,
             IUserService userService,
-            AScript script,
+            Script_S script,
             ScriptUser_S userScript)
         {
             Controls = controls;

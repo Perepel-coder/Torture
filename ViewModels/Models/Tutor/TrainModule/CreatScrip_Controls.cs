@@ -3,27 +3,40 @@ using Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ViewModels.Models.Tutor.TrainModule
 {
     public class CreatScrip_Controls : ReactiveObject
     {
-        public event Action GetTasks = null!;
-        public event Action GetQuestions = null!;
+        public event Action SetScriptTest = () => { };
+        public event Action GetTasks = () => { };
+        public event Action GetQuestions = () => { };
 
-        public ObservableCollection<Question_S> SelectQuestions { get; set; } = new();
-        public ObservableCollection<ATask> SelectTasks { get; set; } = new();
+        public List<Script_S> DeleteScripts = new();
         public ObservableCollection<string> Discriminators { get; set; } = new();
+        public ObservableCollection<string> Topics { get; set; } = new();
+
+
+        private ObservableCollection<Script_S> scripts = new();
+        private ObservableCollection<ATask> selectTasks = new();
         private ObservableCollection<ATask> tasks = new();
+        private ObservableCollection<Question_S> selectQuestions = new();
         private ObservableCollection<Question_S> questions = new();
-        private ObservableCollection<Topic_S> topics = new();
-        public ObservableCollection<Topic_S> Topics
+
+        public ObservableCollection<Script_S> Scripts
         {
-            get => topics;
-            set=> this.RaiseAndSetIfChanged(ref topics, value);
+            get => scripts;
+            set => this.RaiseAndSetIfChanged(ref scripts, value);
+        }
+        public ObservableCollection<ATask> SelectTasks
+        {
+            get => selectTasks;
+            set => this.RaiseAndSetIfChanged(ref selectTasks, value);
+        }
+        public ObservableCollection<Question_S> SelectQuestions
+        {
+            get => selectQuestions;
+            set => this.RaiseAndSetIfChanged(ref selectQuestions, value);
         }
         public ObservableCollection<ATask> Tasks
         {
@@ -36,19 +49,46 @@ namespace ViewModels.Models.Tutor.TrainModule
             set=> this.RaiseAndSetIfChanged(ref questions, value);
         }
 
+
+
+        private Script_S? selectScript;
         private string scriptName = string.Empty;
-        private string testName = string.Empty;
+        private string? selectTopic = string.Empty;
+        private string infoFile = string.Empty;
+        private string? testName = string.Empty;
         private Topic_S selectTopicForScript = new();
-        private Topic_S selectTopicForQuest = new();
+        private string selectTopicForQuest = string.Empty;
         private string selectDiscriminator = string.Empty;
         private ATask? selectTask = new();
         private Question_S? selectQuestion = new();
+
         public string ScriptName
         {
             get => scriptName;
             set => this.RaiseAndSetIfChanged(ref scriptName, value);
         }
-        public string TestName
+        public string InfoFile
+        {
+            get => infoFile;
+            set => this.RaiseAndSetIfChanged(ref infoFile, value);
+        }
+        public Script_S? SelectScript
+        {
+            get=>selectScript;
+            set 
+            {
+                this.RaiseAndSetIfChanged(ref selectScript, value);
+                SetScriptTest();
+            }
+        }
+        public string? SelectTopic
+        {
+            get => selectTopic;
+            set => this.RaiseAndSetIfChanged(ref selectTopic, value);
+        }
+
+
+        public string? TestName
         {
             get => testName;
             set => this.RaiseAndSetIfChanged(ref testName, value);
@@ -58,7 +98,7 @@ namespace ViewModels.Models.Tutor.TrainModule
             get => selectTopicForScript;
             set => this.RaiseAndSetIfChanged(ref selectTopicForScript, value);
         }
-        public Topic_S SelectTopicForQuest
+        public string SelectTopicForQuest
         {
             get => selectTopicForQuest;
             set 

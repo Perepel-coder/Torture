@@ -6,9 +6,10 @@ namespace Services
 {
     public class DialogService
     {
-        private string txtFilter = "Txt files|*.txt;*.docx";
-        private string excelFilter = "|Excel Files|*.xls;*.xlsx;*.xlsm";
-        private string cryptoFilter = "|CryptoTable files|*.ctf";
+        public string txtFilter = "Txt files|*.txt;*.docx";
+        public string excelFilter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+        public string cryptoFilter = "CryptoTable files|*.ctf";
+        public string pdfFilter = "PDF files|*.pdf";
 
         public enum FileType { TEXT, EXCEL, CTF, NAN };
         public string FilePath { get; set; } = string.Empty;
@@ -23,7 +24,7 @@ namespace Services
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (filter == string.Empty) 
             { 
-                openFileDialog.Filter = txtFilter + excelFilter + cryptoFilter; 
+                openFileDialog.Filter = txtFilter + "|" + excelFilter + "|" + cryptoFilter; 
             }
             else 
             { 

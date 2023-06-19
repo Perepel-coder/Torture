@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace View.Tutor
 {
     /// <summary>
-    /// Логика взаимодействия для CreatTaskWindow.xaml
+    /// Логика взаимодействия для AddTopicWindow.xaml
     /// </summary>
-    public partial class CreatTaskWindow : Window
+    public partial class AddTopicWindow : Window
     {
-        public CreatTaskWindow()
+        public AddTopicWindow()
         {
             InitializeComponent();
         }

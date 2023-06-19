@@ -7,7 +7,7 @@ namespace ViewModels.Models
 {
     public class Script_MainMenu_Controls : ReactiveObject
     {
-        public ObservableCollection<AScript> Scripts { get; set; }
+        public ObservableCollection<Script_S> Scripts { get; set; }
         private Script_S? selectedScript;
         public Script_S? SelectedScript
         {

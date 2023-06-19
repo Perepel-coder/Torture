@@ -93,17 +93,17 @@ namespace ViewModels.Autofac
                 c.Resolve<TaskScript_Panel_Controls>(),
                 c.Resolve<ITrainModuleService>(),
                 c.Resolve<IUserService>(),
-                p.Named<AScript>("Script"),
+                p.Named<Script_S>("Script"),
                 p.Named<ScriptUser_S>("UserScript")))
                 .AsSelf();
             builder.Register((c, p) => new Test_VM(
                 c.Resolve<Test_Controls>(),
                 c.Resolve<IUserService>(),
-                p.Named<AScript>("Script")))
+                p.Named<Script_S>("Script")))
                 .AsSelf();
             builder.Register((c, p) => new TrainInform_VM(
                c.Resolve<TrainInform_Controls>(),
-               p.Named<AScript>("Script")))
+               p.Named<Script_S>("Script")))
                 .AsSelf();
             builder.Register(c => new Script_MainMenu_VM(
                 c.Resolve<Script_MainMenu_Controls>(),
@@ -137,6 +137,7 @@ namespace ViewModels.Autofac
             ).AsSelf();
             builder.Register(c => new CreatScript_VM(
                c.Resolve<CreatScrip_Controls>(),
+               c.Resolve<DialogService>(),
                c.Resolve<ITrainModuleService>())
             ).AsSelf();
             builder.Register((c, p) => new LookAnswers_VM(
@@ -166,6 +167,9 @@ namespace ViewModels.Autofac
             builder.Register(c => new CreatTopic_VM(
                c.Resolve<CreatTopic_Controls>(),
                c.Resolve<ITrainModuleService>())
+            ).AsSelf();
+            builder.Register((c, p) => new ChangeScriptName_VM(
+               p.Named<CreatScrip_Controls>("Controls"))
             ).AsSelf();
         }
     }

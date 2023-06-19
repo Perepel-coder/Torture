@@ -25,12 +25,4 @@ namespace Services.Models
         public string MethodName { get; set; }
         public string Answer { get; set; }
     }
-    public abstract class AScript
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Information { get; set; } = null!;
-        public string? Topic { get; set; }
-    }
-
 }

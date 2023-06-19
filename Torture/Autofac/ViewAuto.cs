@@ -19,10 +19,10 @@ namespace View.Autofac
             builder.Register(c=> new UserInfoWindow()).AsSelf();
             builder.Register(c=> new AddGroupWindow()).AsSelf();
             builder.Register(c=> new LookAnswersWindow()).AsSelf();
-            builder.Register(c=> new CreatQuestionWindow()).AsSelf();
             builder.Register(c=> new LookDetailsWindow()).AsSelf();
-            builder.Register(c=> new CreatTaskWindow()).AsSelf();
             builder.Register(c=> new CreatTopicWindow()).AsSelf();
+            builder.Register(c=> new ChangeNameWindow()).AsSelf();
+            builder.Register(c=> new AddTopicWindow()).AsSelf();
         }
     }
 }

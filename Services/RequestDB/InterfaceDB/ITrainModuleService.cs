@@ -21,14 +21,17 @@ namespace Services.RequestDB.InterfaceDB
         IEnumerable<Question_S> GetQuestions();
         IEnumerable<Answer_S> GetAnswers();
         IEnumerable<Answer_S> GetAnswers(int QuestionID, bool clearAnswer);
-        Test_S GetTest(int scriptId, bool clearAnswer);
+        Test_S GetTest(int? Id, bool clearAnswer);
         IEnumerable<Test_S> GetTests(bool clearAnswer);
-        IEnumerable<AScript> GetScripts();
+        IEnumerable<Script_S> GetScripts();
         Script_S GetScript(int id, bool clearAnswer);
 
         Question_S? UpdateQuestion(Question_S question);
         Question_S? SaveQuestion(Question_S question);
         bool DeleteQuestion(Question_S question);
-        bool SaveTopic(string topic);
+        Topic_S SaveTopic(string topic);
+        bool UpdateScript(Script_S script);
+        bool SaveScript(Script_S script);
+        bool DeleteScripts(IEnumerable<Script_S> scripts);
     }
 }

@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="View.Tutor.Controls.CreatScript_2_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             Width="895" Height="523">
+    <Grid Background="Black">
+        <!--#region  Background image-->
+        <Grid>
+            <Grid.Background>
+                <!--<ImageBrush x:Name="img_bg" ImageSource="./Resourses/Coin.jpg"/>-->
+                <SolidColorBrush x:Name="img_bg" Color="DarkGray"/>
+            </Grid.Background>
+        </Grid>
+        <!--#endregion-->
+        <Grid Background="#80808080">
+            <DockPanel>
+                <Button DockPanel.Dock="Bottom" Content="Добавить новый сценарий" Margin="0,2"
+                    Command="{Binding Save}"/>
+                <TextBlock Text="Создание сценария"
+                       DockPanel.Dock="Top"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Style="{StaticResource font_style}"/>
+                <DockPanel Width="570">
+                    <GroupBox DockPanel.Dock="Top" Header="Сценарий - основные параметры">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Width="200">
+                                <TextBlock Margin="0,3" Text="Название сценария"
+                                       Style="{StaticResource font_style}"/>
+                                <TextBlock Margin="0,3" Text="Тема сценария"
+                                       Style="{StaticResource font_style}"/>
+                                <TextBlock Margin="0,3" Text="Файл информации"
+                                       Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                            <StackPanel Width="350">
+                                <TextBox Height="25" Margin="0,3"
+                                     Text="{Binding Controls.ScriptName, Mode=TwoWay}"/>
+
+                                <ComboBox IsEditable="True" Margin="0,3"
+                                          ItemsSource="{Binding Controls.Topics}"
+                                          SelectedItem="{Binding Controls.SelectTopic}"/>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,3">
+                                    <TextBox Width="250" Height="25" IsReadOnly="True"
+                                         Text="{Binding Controls.InfoFile, Mode=TwoWay}"/>
+                                    <Button Content="Загрузить .pdf" Width="100" Height="25" Margin="3,0,0,0" 
+                                        Command="{Binding Download}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox DockPanel.Dock="Top" Header="Тест - основные параметры">
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Top" VerticalAlignment="Top" 
+                                    Orientation="Horizontal" Height="25">
+                                <TextBlock Text="Название теста" 
+                                       Style="{StaticResource font_style}"/>
+                                <TextBox Width="410" Margin="5,0"
+                                     Text="{Binding Controls.TestName, Mode=TwoWay}"/>
+                            </StackPanel>
+                            <GroupBox Header="Текущие вопросы теста" Width="340">
+                                <ListView Background="Transparent"
+                                      BorderBrush="Transparent" 
+                                      ScrollViewer.CanContentScroll="False"
+                                      ItemContainerStyle="{StaticResource ListView_NV_Style_Transparent}"
+                                      ItemsSource="{Binding Controls.SelectQuestions}"
+                                      SelectedItem="{Binding Controls.CurrentSelectQuestion}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                                <TextBlock
+                                                Text="{Binding Path=Text}" 
+                                                TextWrapping="Wrap"
+                                                Width="190"
+                                                FontSize="12"
+                                                Style="{StaticResource font_style}"/>
+                                                <TextBlock Text="Ответы" Margin="5,0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                        <i:InvokeCommandAction 
+                                                            Command="{Binding DataContext.GetAnswers, 
+                                                            RelativeSource={RelativeSource FindAncestor, 
+                                                            AncestorType={x:Type ItemsControl}}}">
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                </TextBlock>
+                                                <TextBlock Text="Удалить">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                        <i:InvokeCommandAction 
+                                                            Command="{Binding DataContext.DeleteQueation, 
+                                                            RelativeSource={RelativeSource FindAncestor, 
+                                                            AncestorType={x:Type ItemsControl}}}">
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </GroupBox>
+                            <GroupBox Header="Добавить вопрос">
+                                <StackPanel>
+                                    <TextBlock Text="Выбрать тему" Style="{StaticResource font_style}"/>
+                                    <ComboBox Margin="0,3"
+                                          ItemsSource="{Binding Controls.Topics}"
+                                          SelectedItem="{Binding Controls.SelectTopicForQuest}"/>
+                                    <StackPanel Margin="0, 5">
+                                        <TextBlock Text="Выбрать вопрос" 
+                                               Style="{StaticResource font_style}"/>
+                                        <ComboBox ItemsSource="{Binding Controls.Questions}"
+                                          SelectedItem="{Binding Controls.SelectQuestion}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Path=Text}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Button Content="Добавить вопрос"
+                                        Command="{Binding AddQueation}"/>
+                                </StackPanel>
+                            </GroupBox>
+                        </DockPanel>
+                    </GroupBox>
+                </DockPanel>
+
+                <StackPanel>
+                    <GroupBox Header="Задачи - основные параметры">
+                        <StackPanel>
+                            <TextBlock Text="Выбрать класс задачи" Style="{StaticResource font_style}"/>
+                            <ComboBox ItemsSource="{Binding Controls.Discriminators}"
+                                  SelectedItem="{Binding Controls.SelectDiscriminator}"/>
+                            <StackPanel Margin="0, 5">
+                                <TextBlock Text="Выбрать задачу" 
+                                       Style="{StaticResource font_style}"/>
+                                <ComboBox ItemsSource="{Binding Controls.Tasks, Mode=TwoWay}"
+                                      SelectedItem="{Binding Controls.SelectTask, Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                            <Button Margin="0,3" Content="Добавить задачу"
+                                Command="{Binding AddTask}"/>
+                            <GroupBox Header="Текущие задачи теста" Height="325">
+                                <ListView Background="Transparent"
+                                  BorderBrush="Transparent" 
+                                  ScrollViewer.CanContentScroll="False"
+                                  ItemContainerStyle="{StaticResource ListView_NV_Style_Transparent}"
+                                  ItemsSource="{Binding Controls.SelectTasks}"
+                                  SelectedItem="{Binding Controls.CurrentSelectTask}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                                <TextBlock
+                                                Text="{Binding Path=Name}" 
+                                                TextWrapping="Wrap"
+                                                Width="190"
+                                                FontSize="12"
+                                                Style="{StaticResource font_style}"/>
+                                                <TextBlock Text="Детали" Margin="5,0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                        <i:InvokeCommandAction 
+                                                            Command="{Binding DataContext.GetDetails, 
+                                                            RelativeSource={RelativeSource FindAncestor, 
+                                                            AncestorType={x:Type ItemsControl}}}">
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                </TextBlock>
+                                                <TextBlock Text="Удалить">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                        <i:InvokeCommandAction 
+                                                            Command="{Binding DataContext.DeleteTask, 
+                                                            RelativeSource={RelativeSource FindAncestor, 
+                                                            AncestorType={x:Type ItemsControl}}}">
+                                                        </i:InvokeCommandAction>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
+
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+    </Grid>
+    
+</UserControl>
