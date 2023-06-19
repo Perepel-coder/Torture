@@ -20,8 +20,8 @@
     <None Remove="Researcher\Resourses\user.png" />
     <None Remove="Researcher\Scripts\pillory.ico" />
     <None Remove="Researcher\Scripts\Resourses\AESScript_Part1.pdf" />
+    <None Remove="Researcher\Scripts\Resourses\MagmaGOST89.pdf" />
     <None Remove="Researcher\Scripts\Resourses\Sum&amp;MultGF%282n%29.pdf" />
-    <None Remove="Researcher\Scripts\Resourses\TrainInfo.html" />
     <None Remove="Researcher\Tasks\Resourses\CompilerDivPoly.html" />
     <None Remove="Researcher\Tasks\Resourses\CompilerMultPoly.html" />
     <None Remove="Researcher\Tasks\Resourses\css\mystyle.css" />
@@ -49,9 +49,12 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Cryptoalgorithm.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Researcher\Scripts\Resourses\AESScript_Part1.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Researcher\Scripts\Resourses\MagmaGOST89.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Researcher\Tasks\Resourses\CompilerDivPoly.html">
@@ -85,10 +88,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="TrainingModule.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="User.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <Resource Include="pillory.ico" />
     <Resource Include="Researcher\Resourses\user.png">
@@ -121,9 +124,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Researcher\Scripts\Resourses\Sum&amp;MultGF(2n).pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Researcher\Scripts\Resourses\TrainInfo.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Researcher\Tasks\Resourses\CompilerMultPoly.html">

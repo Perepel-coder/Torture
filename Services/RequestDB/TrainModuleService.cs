@@ -284,7 +284,6 @@ namespace Services.RequestDB
         }
         public IEnumerable<Script_S> GetScripts()
         {
-
             return scriptRepo.GetAll().Select(s =>
             new Script_S
             {

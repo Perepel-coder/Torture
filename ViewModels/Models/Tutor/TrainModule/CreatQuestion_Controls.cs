@@ -12,7 +12,7 @@ namespace ViewModels.Models.Tutor.TrainModule
         private ObservableCollection<Topic_S> topics = new();
         private ObservableCollection<string> topics_quest = new();
 
-        public Action GetListQuestions = () => { };
+        public event Action? GetListQuestions;
         public ObservableCollection<Topic_S> Topics
         {
             get => topics;
@@ -50,7 +50,10 @@ namespace ViewModels.Models.Tutor.TrainModule
             set 
             {
                 this.RaiseAndSetIfChanged(ref selectTopic, value);
-                GetListQuestions();
+                if (GetListQuestions != null)
+                {
+                    GetListQuestions.Invoke();
+                }
             }
         }
         public string Topic

@@ -111,6 +111,7 @@ namespace ViewModels.Tutor.TrainModule
                         Controls.Questions.Add(question);
                     }
                     Controls.Topics = new(TMS.GetTopics());
+                    Controls.SelectTopic = Controls.Topics.Single(q=>q.Name == question.Topic);
                     GetListQuestions();
                     Controls.Topics_quest = new(Controls.Topics.Select(t => t.Name));
                 });
@@ -186,8 +187,11 @@ namespace ViewModels.Tutor.TrainModule
 
         private void GetListQuestions()
         {
-            Controls.Questions = new(TMS.GetQuestions()
-                .Where(q => q.Topic == Controls.SelectTopic.Name));
+            if (Controls.SelectTopic != null)
+            {
+                Controls.Questions = new(TMS.GetQuestions()
+                    .Where(q => q.Topic == Controls.SelectTopic.Name));
+            }
         }
     }
 }

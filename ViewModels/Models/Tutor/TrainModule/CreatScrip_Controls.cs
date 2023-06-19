@@ -8,9 +8,9 @@ namespace ViewModels.Models.Tutor.TrainModule
 {
     public class CreatScrip_Controls : ReactiveObject
     {
-        public event Action SetScriptTest = () => { };
-        public event Action GetTasks = () => { };
-        public event Action GetQuestions = () => { };
+        public event Action? SetScriptTest;
+        public event Action? GetTasks;
+        public event Action? GetQuestions;
 
         public List<Script_S> DeleteScripts = new();
         public ObservableCollection<string> Discriminators { get; set; } = new();
@@ -78,7 +78,10 @@ namespace ViewModels.Models.Tutor.TrainModule
             set 
             {
                 this.RaiseAndSetIfChanged(ref selectScript, value);
-                SetScriptTest();
+                if(SetScriptTest != null)
+                {
+                    SetScriptTest.Invoke();
+                }
             }
         }
         public string? SelectTopic
@@ -104,7 +107,10 @@ namespace ViewModels.Models.Tutor.TrainModule
             set 
             { 
                 this.RaiseAndSetIfChanged(ref selectTopicForQuest, value);
-                GetQuestions();
+                if (GetQuestions != null)
+                {
+                    GetQuestions.Invoke();
+                }
             }
         }
         public string SelectDiscriminator
@@ -113,7 +119,10 @@ namespace ViewModels.Models.Tutor.TrainModule
             set 
             {
                 this.RaiseAndSetIfChanged(ref selectDiscriminator, value);
-                GetTasks();
+                if (GetTasks != null)
+                {
+                    GetTasks.Invoke();
+                }
             } 
         }
         public ATask? SelectTask

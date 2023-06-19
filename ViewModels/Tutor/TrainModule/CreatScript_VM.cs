@@ -25,6 +25,8 @@ namespace ViewModels.Tutor.TrainModule
             TMS = trainModuleService;
             DS = dialogService;
 
+            Controls.GetTasks += GetTasks;
+            Controls.GetQuestions += GetQuestions;
             TransitionUpdate.Execute(null);
         }
         private RelayCommand? download;
@@ -59,11 +61,11 @@ namespace ViewModels.Tutor.TrainModule
                                 Environment.CurrentDirectory +
                                 @"\Researcher\Scripts\Resourses\" + DS.FileName);
                             Controls.InfoFile = DS.FileName;
-                            OpenFileMSG_GOOD($"Файл {DS.FilePath} успешно загружен");
+                            InfoMessage($"Файл {DS.FilePath} успешно загружен");
                         }
                         catch
                         {
-                            OpenFileMSG_ERROR($"Не удалось загрузить файл {DS.FilePath}");
+                            ErrorFileMessage($"Не удалось загрузить файл {DS.FilePath}");
                         }
                     }
                 });
@@ -232,9 +234,7 @@ namespace ViewModels.Tutor.TrainModule
             {
                 return transitionUpdate ??= new RelayCommand(obj =>
                 {
-                    Controls.SetScriptTest += () => SetScriptTest();
-                    Controls.GetTasks += () => GetTasks();
-                    Controls.GetQuestions += () => GetQuestions();
+                    Controls.SetScriptTest += SetScriptTest;
 
                     Controls.Scripts = new(TMS.GetScripts());
                     Controls.SelectScript = Controls.Scripts.First();
@@ -254,9 +254,7 @@ namespace ViewModels.Tutor.TrainModule
             {
                 return transitionSave ??= new RelayCommand(obj =>
                 {
-                    Controls.SetScriptTest -= () => SetScriptTest();
-                    Controls.GetTasks += () => GetTasks();
-                    Controls.GetQuestions += () => GetQuestions();
+                    Controls.SetScriptTest -= SetScriptTest;
 
                     Controls.Scripts = new(TMS.GetScripts());
                     Controls.Topics = new(TMS.GetTopics().Select(t => t.Name));
@@ -329,12 +327,17 @@ namespace ViewModels.Tutor.TrainModule
                         ErrorMessage("Не возможно добавить сценарий " +
                             "без файла тестовой информации");
                     }
+                    if(Controls.ScriptName.Replace(" ", "").ToLower() == string.Empty)
+                    {
+                        ErrorMessage("Не возможно добавить сценарий " +
+                            "без названия");
+                    }
                     Script_S script = new();
                     script.Test = new();
                     script.Name = Controls.ScriptName;
                     script.Topic = Controls.SelectTopic;
                     script.Information = Controls.InfoFile;
-                    script.Test.Name = Controls.TestName ??= string.Empty;
+                    script.Test.Name = Controls.TestName ??= "New test";
                     script.Test.Questions = Controls.SelectQuestions.ToList();
                     script.Test.Tasks = Controls.SelectTasks.ToList();
                     if (TMS.SaveScript(script))
@@ -370,6 +373,7 @@ namespace ViewModels.Tutor.TrainModule
 
         private void SetScriptTest()
         {
+            Controls.InfoFile = Controls.SelectScript.Information;
             Controls.SelectTopic = Controls.SelectScript?.Topic;
             Controls.TestName = Controls.SelectScript?.Test?.Name;
 

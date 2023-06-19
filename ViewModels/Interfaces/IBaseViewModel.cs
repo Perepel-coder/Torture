@@ -20,6 +20,8 @@ namespace ViewModels.Interfaces
         public static User_S User { get; set; } = null!;
         public static IContainer Builder { get; set; } = null!;
         public virtual string Name { get; set; } = typeof(BaseViewModel).Name;
+
+
         public static void InfoMessage(string msg, string? title = "Успешная операция")
         {
             MessageBox.Show(msg,title,MessageBoxButton.OK,MessageBoxImage.Information);
@@ -33,6 +35,8 @@ namespace ViewModels.Interfaces
         {
             ErrorMessage(msg, "Ошибка взаимодействия с файлом");
         }
+
+
 
         public static string OpenFileMSG_GOOD(string filename)
         {

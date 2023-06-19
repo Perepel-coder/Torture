@@ -36,7 +36,7 @@
                                 <TextBox Height="25" Margin="0,3"
                                      Text="{Binding Controls.ScriptName, Mode=TwoWay}"/>
 
-                                <ComboBox IsEditable="True" Margin="0,3"
+                                <ComboBox Margin="0,3"
                                           ItemsSource="{Binding Controls.Topics}"
                                           SelectedItem="{Binding Controls.SelectTopic}"/>
 
