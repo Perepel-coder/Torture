@@ -106,8 +106,9 @@ namespace Torture
         }
         void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("Ошибка\n" + e.Exception.StackTrace + " " + "Исключение: "
-                            + e.Exception.GetType().ToString() + " " + e.Exception.Message);
+            MessageBox.Show("Ошибка\n" + "Исключение: " 
+                + e.Exception.GetType().ToString()
+                + " " + e.Exception.Message);
 
             e.Handled = true;
         }
