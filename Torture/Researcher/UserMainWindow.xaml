@@ -108,7 +108,7 @@
                                 </Button.Background>
                             </Button>
 
-                            <TextBlock Margin="10" Text="Прлфиль" Style="{StaticResource font_style}"/>
+                            <TextBlock Margin="10" Text="Профиль" Style="{StaticResource font_style}"/>
 
                         </StackPanel>
                     </ListViewItem>
