@@ -26,7 +26,7 @@ namespace ViewModels.Researcher.Script
             Controls = controls;
             TMS = trainModuleService;
             US = userService;
-            Controls.Script = script as Script_S;
+            Controls.Script = script;
             this.userScript = userScript;
         }
         private RelayCommand? getTask;
@@ -56,6 +56,12 @@ namespace ViewModels.Researcher.Script
                             model = Builder.Resolve<Rocket_VM>(
                                 new NamedParameter("Task", task));
                             
+                        }
+                        if(Controls.SelectTask.Discriminator == "SelectKey")
+                        {
+                            task = TMS.GetSelectKey(Controls.SelectTask.Id);
+                            model = Builder.Resolve<KeySelect_VM>(
+                                new NamedParameter("Task", task));
                         }
                         AppWindows.ShowDialog(AppWindows.SetDataContext("ScriptTask", model));
 

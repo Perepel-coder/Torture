@@ -73,27 +73,15 @@
 
         <Grid>
             <controls:CombinationLock_Control x:Name="CombinationLock_Control" 
-                                              Visibility="{Binding 
-                ElementName=MainMenu_Tasks, 
-                Path=DataContext.Controls.CombLock_V,
-                Mode=TwoWay,
-                UpdateSourceTrigger=PropertyChanged}"
+                                              Visibility="{Binding ElementName=MainMenu_Tasks, Path=DataContext.Controls.CombLock_V, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               DataContext="{Binding Controls.CurrentVM_MenuTasks}"/>
             
             <controls:Rocket_Control x:Name="Rocket_Control" 
-                                     Visibility="{Binding 
-                ElementName=MainMenu_Tasks, 
-                Path=DataContext.Controls.Rocket_V,
-                Mode=TwoWay,
-                UpdateSourceTrigger=PropertyChanged}"
+                                     Visibility="{Binding ElementName=MainMenu_Tasks, Path=DataContext.Controls.Rocket_V, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                      DataContext="{Binding Controls.CurrentVM_MenuTasks}"/>
             
             <controls:KeySelection_Control x:Name="KeySelection_Control"
-                                           Visibility="{Binding 
-                ElementName=MainMenu_Tasks, 
-                Path=DataContext.Controls.KeySelection_V,
-                Mode=TwoWay,
-                UpdateSourceTrigger=PropertyChanged}"
+                                           Visibility="{Binding ElementName=MainMenu_Tasks, Path=DataContext.Controls.KeySelection_V, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            DataContext="{Binding Controls.CurrentVM_MenuTasks}"/>
         </Grid>
     </Grid>

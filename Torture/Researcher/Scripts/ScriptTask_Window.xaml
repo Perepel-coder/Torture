@@ -16,5 +16,8 @@
         <controls:Rocket_Control 
             x:Name="Rocket_Control"
             Visibility="{Binding Controls.Rocket}"/>
+        <controls:KeySelection_Control 
+            x:Name="KeySelection_Control"
+            Visibility="{Binding Controls.KeySelect }"/>
     </Grid>
 </Window>

@@ -18,7 +18,10 @@
 
   <ItemGroup>
     <Reference Include="System.Windows.Controls.DataVisualization.Toolkit">
-      <HintPath>..\..\..\libraries\system.windows.controls.datavisualization.toolkit.dll</HintPath>
+      <HintPath>..\Torture\Library\system.windows.controls.datavisualization.toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit">
+      <HintPath>Library\WPFToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
 

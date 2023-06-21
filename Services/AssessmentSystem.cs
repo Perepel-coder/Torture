@@ -49,7 +49,7 @@ namespace Services
                 script.Test.Tasks.Count * 100;
 
             script.Test.TasksScore =
-                (percentGT <= 10) ? 2 :
+                (percentGT <= 25) ? 2 :
                 (percentGT <= 50) ? 3 :
                 (percentGT <= 70) ? 4 : 5;
 

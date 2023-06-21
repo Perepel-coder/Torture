@@ -3,11 +3,12 @@ using Services.Models;
 using Services.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using trans = Services.Crypto.TransformData;
 
 namespace ViewModels.Models.Tasks
 {
-    public class KeySelect_Controls : ReactiveObject
+    public class KeySelect_Controls : Task_Main_Controls
     {
         public ObservableCollection<Mode_S> ListOfAlgMode { get; set; } = new();
         public ObservableCollection<CryptoAlg_S> ListOfAlg { get; set; } = new();
@@ -52,6 +53,13 @@ namespace ViewModels.Models.Tasks
         {
             get => answer;
             set => this.RaiseAndSetIfChanged(ref answer, value);
+        }
+
+        public KeySelect_Controls()
+        {
+            Rocket = Visibility.Collapsed;
+            CombLock = Visibility.Collapsed;
+            KeySelect = Visibility.Visible;
         }
     }
 }

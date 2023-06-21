@@ -48,7 +48,7 @@ namespace ViewModels.Models.Tasks
         }
     }
 
-    public class CombLock_Controls : ReactiveObject
+    public class CombLock_Controls : Task_Main_Controls 
     {
         public string Answer { get; set; } = null!;
         public Func<int?, int?, int?, int> FuncTask { get; set; } = null!;
@@ -128,21 +128,8 @@ namespace ViewModels.Models.Tasks
             htmlCode = string.Empty;
             IsEnabledTool = false;
             Rocket = Visibility.Collapsed;
+            KeySelect = Visibility.Collapsed;
             CombLock = Visibility.Visible;
-        }
-
-        private Visibility combLock;
-        public Visibility CombLock
-        {
-            get => combLock;
-            set => this.RaiseAndSetIfChanged(ref combLock, value);
-        }
-
-        private Visibility rocket;
-        public Visibility Rocket
-        {
-            get => rocket;
-            set => this.RaiseAndSetIfChanged(ref rocket, value);
         }
     }
 }

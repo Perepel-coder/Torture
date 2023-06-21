@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace ViewModels.Models.Tasks
 {
-    public class Rocket_Controls : ReactiveObject
+    public class Rocket_Controls : Task_Main_Controls
     {
         public Image? Image { get; set; }
         public string ClassName { get; set; } = null!;
@@ -41,20 +41,7 @@ namespace ViewModels.Models.Tasks
             htmlCode = string.Empty;
             Rocket = Visibility.Visible;
             CombLock = Visibility.Collapsed;
-        }
-
-        private Visibility combLock;
-        public Visibility CombLock
-        {
-            get => combLock;
-            set => this.RaiseAndSetIfChanged(ref combLock, value);
-        }
-
-        private Visibility rocket;
-        public Visibility Rocket
-        {
-            get => rocket;
-            set => this.RaiseAndSetIfChanged(ref rocket, value);
+            KeySelect = Visibility.Collapsed;
         }
 
         public IEnumerable<string[]> GetTests(string data)
